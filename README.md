@@ -1,1 +1,0 @@
-# bazydanych-2022-spacex
