@@ -1,0 +1,38 @@
+body {
+    background-color: #eee;
+    text-decoration: none;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 15%;
+    padding: 50px;
+    margin-top: 150px;
+}
+input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #444;
+}
+input:hover {
+    border: 3px solid #888;
+}
+a {
+    text-decoration: none;
+    color: black;
+    width: 300px;
+    background-color: #999;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 15px;
+}
+a:hover {
+    padding: 4px;
+    border: 1px solid #000;
+}
