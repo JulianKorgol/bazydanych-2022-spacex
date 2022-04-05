@@ -19,5 +19,5 @@ Nazwa varchar(30) not null,
 Opis varchar(max),
 Statusy varchar(10) not null check(Statusy in ('Zakonczona','W Trakcie','Nie Rozpoczeta'),
 DataRozpoczecia datetime not null,
-DataZakonczenia datetime not null)
+DataZakonczenia datetime not null)  -- przewidywana,a jak już zakończona misja jest to rzeczywista
 
