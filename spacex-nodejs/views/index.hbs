@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="btn btn-outline-primary" aria-current="page" href="/new-product">Nowy produkt</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <select class="form-control me-2" name="kategoria">
+            <option value="">wszystko</option>
+            <option value="ubrania">ubrania</option>
+            <option value="zabawki">zabawki</option>
+            <option value="sztuka">sztuka</option>
+        </select>
+        <button class="btn btn-outline-success" type="submit">Pokaż</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th>Ilość</th>
+            <th>Kategoria</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+        <tr>
+            <td>{{this.Id}}</td>
+            <td>{{this.Nazwa}}</td>
+            <td>{{this.Cena}}</td>
+            <td>{{this.Ilosc}}</td>
+            <td>{{this.Kategoria}}</td>
+            <td>
+                <form action="product/{{this.Id}}/delete" method="POST">
+                  <button type="submit" class="btn btn-sm btn-outlince-danger">&times;</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

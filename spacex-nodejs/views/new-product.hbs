@@ -1,0 +1,33 @@
+<form action="" method="POST">
+    <div class="mb-3">
+        <label for="nazwa" class="form-label">Nazwa</label>
+        <input type="text" class="form-control" name="nazwa" id="nazwa">
+    </div>
+
+    <div class="mb-3">
+        <label for="cena" class="form-label">Cena</label>
+        <input type="text" class="form-control" name="cena" id="cena">
+    </div>
+
+    <div class="mb-3">
+        <label for="ilosc" class="form-label">Ilość</label>
+        <input type="number" min="0" max="999" class="form-control" name="ilosc" id="ilosc">
+    </div>
+
+    <div class="mb-5">
+        <label for="kategoria" class="form-label">Kategoria</label>
+        <select class="form-control" name="kategoria" id="kategoria">
+            <option value="ubrania">ubrania</option>
+            <option value="zabawki">zabawki</option>
+            <option value="sztuka">sztuka</option>
+        </select>
+    </div>
+
+    <div class="text-center mb-3">
+        <button class="btn btn-lg btn-primary">Dodaj</button>
+    </div>
+    <div class="text-center">
+        <a href="/">Powrót</a>
+    </div>
+</form>
+

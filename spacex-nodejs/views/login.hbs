@@ -1,0 +1,30 @@
+{{#if error}}
+  <div class="alert alert-danger mt-3" role="alert">
+    {{error}}
+  </div>
+{{/if}}
+
+<form action="" method="POST">
+  <div class="mb-3">
+    <label for="nazwa" class="form-label">Login</label>
+    <input type="text" class="form-control" name="login" id="nazwa" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="cena" class="form-label">Hasło</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      id="cena"
+      required
+    />
+  </div>
+
+  <div class="text-center mb-3">
+    <button class="btn btn-lg btn-primary">Zaloguj</button>
+  </div>
+  <div class="text-center">
+    <a href="/">Powrót</a>
+  </div>
+</form>

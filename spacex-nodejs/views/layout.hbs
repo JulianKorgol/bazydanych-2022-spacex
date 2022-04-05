@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid justify-content-start">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="logo" height="35" class="me-2">Magazyn</a>
+    </div>
+  </nav>
+  <div class="container">
+    {{#if message}}
+    <div class="alert alert-success mt-2" role="alert">
+      {{message}}
+    </div>
+    {{/if}}
+
+    <h1 class="mb-1 mt-5">{{title}}</h1>
+
+    {{{body}}}
+  </div>
+</body>
+
+</html>
