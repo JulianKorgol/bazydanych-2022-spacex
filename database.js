@@ -2,14 +2,14 @@ const sql = require('mssql')
 
 const DB_USER = 'app'
 const DB_PWD = 'app'
-const DB_NAME = 'magazyn2022'
+const DB_NAME = 'spacex'
 
 const sqlConfig = {
   user: DB_USER,
   password: DB_PWD,
   database: DB_NAME,
   server: 'localhost',
-    // port: 1334,
+    port: 1434,
   options: {
     trustServerCertificate: true
   }
