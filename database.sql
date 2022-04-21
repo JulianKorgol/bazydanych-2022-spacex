@@ -31,11 +31,12 @@ CREATE TABLE Uzytkownik (
                             nazwisko VARCHAR(30) NOT NULL CHECK(LEN(nazwisko) >= 3),
                             ulica VARCHAR(50) NOT NULL,
                             numerDomu SMALLINT NOT NULL CHECK(numerDomu > 0),
-                            numerMieszkania SMALLINT NOT NULL CHECK(numerMieszkania > 0),
+                            numerMieszkania SMALLINT NOT NULL CHECK(numerMieszkania > 0), -- numer mieszkania powinien być opcjonalny
                             miasto VARCHAR(50) NOT NULL,
                             kodPocztowy CHAR(6) NOT NULL CHECK(kodPocztowy LIKE '%-%'),
-                            rodzajUzytkownika VARCHAR(30) NOT NULL CHECK(rodzajUzytkownika IN ('Headadmin', 'admin', 'user')),
+                            rodzajUzytkownika VARCHAR(30) NOT NULL CHECK(rodzajUzytkownika IN ('Headadmin', 'admin', 'user')), -- skoro admin i user pisane są małymi literami, to samo powinno tyczyć się headadmin
                             specjalizacja VARCHAR(70)
+                            -- brakuje pola ZwierzchnikId lub SzefId
 )
 
 CREATE TABLE WzorceMisji (
@@ -49,10 +50,11 @@ CREATE TABLE Misja (
                        id INT NOT NULL IDENTITY PRIMARY KEY,
                        nazwa VARCHAR(150) NOT NULL,
                        opis VARCHAR(max),
-                       status VARCHAR(30) NOT NULL CHECK(status IN ('w trakcie przygotowań', 'trwa', 'zakończona')),
+                       status VARCHAR(30) NOT NULL CHECK(status IN ('w trakcie przygotowań', 'trwa', 'zakończona')), -- może zamiast 'w trakcie przygotowań' lepiej użyć 'planowana'
                        terminRozpoczecia DATETIME NOT NULL CHECK(terminRozpoczecia > GETDATE()),
                        terminZakonczenia DATETIME NOT NULL CHECK(terminZakonczenia > GETDATE()),
                        wzorzecId INT REFERENCES WzorceMisji(id)
+                       -- dodajcie jeszcze CONSTRAINT, który sprawdzi, czy terminRozpoczęcia < terminaZakończenia
 )
 
 CREATE TABLE Zaloga (
