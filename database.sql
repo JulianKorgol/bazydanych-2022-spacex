@@ -54,7 +54,7 @@ CREATE TABLE Misja (
                        terminRozpoczecia DATETIME NOT NULL CHECK(terminRozpoczecia > GETDATE()),
                        terminZakonczenia DATETIME NOT NULL CHECK(terminZakonczenia > GETDATE()),
                        wzorzecId INT REFERENCES WzorceMisji(id),
-                       CONSTRAINT con_daty check(terminRozpoczecia < terminZakonczenia)
+                       CONSTRAINT con_daty CHECK(terminRozpoczecia < terminZakonczenia)
 )
 
 CREATE TABLE Zaloga (
