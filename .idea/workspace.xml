@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="476e4757-278a-48e6-9a3b-f7fc73a1a6cc" name="Changes" comment="Catalog fix">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/projekt2022.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database.sql" afterDir="false" />
+    <list default="true" id="476e4757-278a-48e6-9a3b-f7fc73a1a6cc" name="Changes" comment="Komentarze - podział pliku index.js">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,19 +29,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="sqlserver" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bin/www" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="database.data.csv.formats" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RunManager">
     <configuration name="nodejs" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
       <method v="2" />
@@ -62,7 +54,20 @@
       <workItem from="1649154057184" duration="29000" />
       <workItem from="1649236405353" duration="3000" />
       <workItem from="1649515683349" duration="2055000" />
-      <workItem from="1649518878387" duration="918000" />
+      <workItem from="1649518878387" duration="1283000" />
+      <workItem from="1649708412393" duration="21000" />
+      <workItem from="1649855389457" duration="8000" />
+      <workItem from="1650373602557" duration="231000" />
+      <workItem from="1650373842545" duration="826000" />
+      <workItem from="1650460148304" duration="6000" />
+      <workItem from="1650527959328" duration="620000" />
+      <workItem from="1651064755641" duration="6000" />
+      <workItem from="1651152474410" duration="695000" />
+      <workItem from="1652080978275" duration="7000" />
+      <workItem from="1652081033142" duration="463000" />
+      <workItem from="1652167205907" duration="1471000" />
+      <workItem from="1652171863141" duration="10000" />
+      <workItem from="1652172121827" duration="45000" />
     </task>
     <task id="LOCAL-00001" summary="Catalog fix">
       <created>1649146935715</created>
@@ -71,7 +76,42 @@
       <option name="project" value="LOCAL" />
       <updated>1649146935715</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="SQL - spacex - database.sql - 1.0">
+      <created>1649521082142</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649521082142</updated>
+    </task>
+    <task id="LOCAL-00003" summary="sql spacex.sql - deleted">
+      <created>1649521296174</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1649521296174</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Clean code improvement">
+      <created>1651152836011</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1651152836011</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Project name change in www file">
+      <created>1651153094790</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1651153094790</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Komentarze - podział pliku index.js">
+      <created>1652171458885</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1652171458885</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,6 +131,11 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Catalog fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Catalog fix" />
+    <MESSAGE value="SQL - spacex - database.sql - 1.0" />
+    <MESSAGE value="sql spacex.sql - deleted" />
+    <MESSAGE value="Clean code improvement" />
+    <MESSAGE value="Project name change in www file" />
+    <MESSAGE value="Komentarze - podział pliku index.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Komentarze - podział pliku index.js" />
   </component>
 </project>

@@ -9,11 +9,20 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid justify-content-start">
+    <div class="container">
       <a class="navbar-brand" href="/">
         <img src="/images/logo.png" alt="logo" height="35" class="me-2">Magazyn</a>
+
+      {{#if userLogin}}
+        <div class="navbar-text"> Zalogowany jako: {{userLogin}}</div> <form action="/logout" method="POST"><button type="submit" class="btn btn-outline-primary btn-sm btn-inline">Wyloguj</button></form>
+      {{else}}
+        <a href="/login" class="btn btn-outline-primary btn-sm">Zaloguj</a>
+      {{/if}}
+
     </div>
+   
   </nav>
+  
   <div class="container">
     {{#if message}}
     <div class="alert alert-success mt-2" role="alert">
@@ -22,7 +31,6 @@
     {{/if}}
 
     <h1 class="mb-1 mt-5">{{title}}</h1>
-
     {{{body}}}
   </div>
 </body>

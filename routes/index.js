@@ -1,4 +1,5 @@
 const express = require('express')
+const req = require('express/lib/request')
 const sql = require('mssql')
 const router = express.Router()
 const { request } = require('../database')
@@ -23,7 +24,13 @@ async function showProducts(req, res) {
     console.error('Nie udało się pobrać produktów', err)
   }
 
-  res.render('index', { title: 'Lista produktów', products: products, message: res.message, kategoria: req.query.kategoria })
+  res.render('index', { 
+    title: 'Lista produktów', 
+    products: products, 
+    message: res.message, 
+    kategoria: req.query.kategoria,
+    userLogin: req.session?.userLogin
+   })
 }
 
 async function showNewProductForm(req, res) {
@@ -81,6 +88,7 @@ async function login(req, res) {
       .query('SELECT Login FROM Uzytkownicy WHERE Login = @Login AND Haslo = @Haslo')
   
     if (result.rowsAffected[0] === 1) {
+      req.session.userLogin = login;
       showProducts(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'})
@@ -91,11 +99,18 @@ async function login(req, res) {
 
 }
 
+function logout(req, res) {
+  req.session.destroy();
+
+  showProducts(req, res);
+}
+
 router.get('/', showProducts);
 router.get('/new-product', showNewProductForm);
 router.post('/new-product', addNewProduct);
 router.post('/product/:id/delete', deleteProduct);
 router.get('/login', showLoginForm);
 router.post('/login', login);
+router.post('/logout', logout);
 
 module.exports = router;
