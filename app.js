@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes');
+// Podział pliku index.js
+//const newProductRouter = require('./routes/newProduct');
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use(express.urlencoded({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+// Podział pliku index.js
+// app.use('/new-product', newProductRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
