@@ -38,7 +38,7 @@ CREATE TABLE Uzytkownik (
                             specjalizacja VARCHAR(70),
                             SzefId INT REFERENCES Uzytkownik(id),
                             haslo VARCHAR(75) NOT NULL CHECK(LEN(haslo) > 10),
-                            login VARCHAR(75) NOT NULL CHECK(LEN(login) > 3)
+                            login VARCHAR(75) NOT NULL UNIQUE CHECK(LEN(login) > 3)
 )
 
 CREATE TABLE WzorceMisji (
