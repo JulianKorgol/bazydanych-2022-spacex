@@ -42,14 +42,65 @@ function logout(req, res) {
 }
 
 // SPACEX - funkcjonalności
+// Wyświetlanie załogi
+// Wyświetlanie listy misji
 // Tworzenie załogi - TODO
 // Tworzenie misji - TODO
-// Wyświetlanie załogi - TODO
-// Wyświetlanie listy misji - TODO
 // Wyświetlanie szczegółów misji - TODO
 // Logowanie - TODO
 // Korzystanie z wzorców misji - TODO
 // Uprawnienia - TODO
+
+
+// Wyświetlanie załogi
+async function showCrew(req, res) {
+  let crew = []
+
+  try {
+    const dbRequest = await request()
+    let crew;
+
+    result = await dbRequest
+        .query("SELECT * FROM Uzytkownik WHERE rodzajUzytkownika != 'headadmin' or rodzajUzytkownika != 'admin'")
+
+    crew = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać listy załogi', err)
+  }
+
+  // res.render('index', {
+  //   title: 'Lista produktów',
+  //   products: products,
+  //   message: res.message,
+  //   kategoria: req.query.kategoria,
+  //   userLogin: req.session?.userLogin
+  // }
+}
+
+// Wyświetlanie listy misji
+async function showMissions(req, res) {
+  let missions = []
+
+  try {
+    const dbRequest = await request()
+    let missions;
+
+    result = await dbRequest
+        .query('SELECT * FROM Misja')
+
+    missions = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać listy misji.', err)
+  }
+
+  // res.render('index', {
+  //   title: 'Lista produktów',
+  //   products: products,
+  //   message: res.message,
+  //   kategoria: req.query.kategoria,
+  //   userLogin: req.session?.userLogin
+  // }
+}
 
 
 router.get('/', homePage);
