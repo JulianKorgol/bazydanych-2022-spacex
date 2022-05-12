@@ -36,7 +36,7 @@ CREATE TABLE Uzytkownik (
                             kodPocztowy CHAR(6) NOT NULL CHECK(kodPocztowy LIKE '%-%'),
                             rodzajUzytkownika VARCHAR(30) NOT NULL CHECK(rodzajUzytkownika IN ('headadmin', 'admin', 'user')),
                             specjalizacja VARCHAR(70),
-                            SzefId INT REFERENCES Uzytkownik(ID)
+                            SzefId INT REFERENCES Uzytkownik(id)
 )
 
 CREATE TABLE WzorceMisji (
