@@ -41,6 +41,17 @@ function logout(req, res) {
   showProducts(req, res);
 }
 
+// SPACEX - funkcjonalności
+// Tworzenie załogi - TODO
+// Tworzenie misji - TODO
+// Wyświetlanie załogi - TODO
+// Wyświetlanie listy misji - TODO
+// Wyświetlanie szczegółów misji - TODO
+// Logowanie - TODO
+// Korzystanie z wzorców misji - TODO
+// Uprawnienia - TODO
+
+
 router.get('/', homePage);
 router.get('/login', showLoginForm);
 router.post('/login', login);
