@@ -46,10 +46,9 @@ function logout(req, res) {
 // Wyświetlanie listy misji
 // Tworzenie załogi - TODO
 // Tworzenie misji - TODO
-// Wyświetlanie szczegółów misji - TODO
 // Logowanie - TODO
-// Korzystanie z wzorców misji - TODO
 // Uprawnienia - TODO
+// Korzystanie z wzorców misji - TODO
 
 
 // Wyświetlanie załogi
@@ -68,13 +67,12 @@ async function showCrew(req, res) {
     console.error('Nie udało się pobrać listy załogi', err)
   }
 
-  // res.render('index', {
-  //   title: 'Lista produktów',
-  //   products: products,
-  //   message: res.message,
-  //   kategoria: req.query.kategoria,
-  //   userLogin: req.session?.userLogin
-  // }
+  res.render('index', {
+    title: 'Lista załogentów',
+    crewlist: crew,
+    message: res.message,
+    userLogin: req.session?.userLogin
+  })
 }
 
 // Wyświetlanie listy misji
@@ -93,13 +91,12 @@ async function showMissions(req, res) {
     console.error('Nie udało się pobrać listy misji.', err)
   }
 
-  // res.render('index', {
-  //   title: 'Lista produktów',
-  //   products: products,
-  //   message: res.message,
-  //   kategoria: req.query.kategoria,
-  //   userLogin: req.session?.userLogin
-  // }
+  res.render('index', {
+    title: 'Lista misji',
+    missions: missions,
+    message: res.message,
+    userLogin: req.session?.userLogin
+  })
 }
 
 
