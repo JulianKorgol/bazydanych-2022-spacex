@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('magazyn:server');
+var debug = require('debug')('spacex:server');
 var http = require('http');
 
 /**
