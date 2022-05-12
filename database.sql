@@ -36,8 +36,9 @@ CREATE TABLE Uzytkownik (
                             kodPocztowy CHAR(6) NOT NULL CHECK(kodPocztowy LIKE '%-%'),
                             rodzajUzytkownika VARCHAR(30) NOT NULL CHECK(rodzajUzytkownika IN ('headadmin', 'admin', 'user')),
                             specjalizacja VARCHAR(70),
-                            SzefId INT REFERENCES Uzytkownik(id)
-                            haslo VARCHAR(75) NOT NULL CHECK(LEN(haslo) > 10)
+                            SzefId INT REFERENCES Uzytkownik(id),
+                            haslo VARCHAR(75) NOT NULL CHECK(LEN(haslo) > 10),
+                            login VARCHAR(75) NOT NULL CHECK(LEN(login) > 3)
 )
 
 CREATE TABLE WzorceMisji (
@@ -78,10 +79,10 @@ INSERT INTO WzorceMisji VALUES
 
 
 INSERT INTO Uzytkownik VALUES
-('Mateusz','Gontarek','Okopowa',59,525,'Warszawa','00-000','headadmin','Python',null, 'MojeSuperTajneiBezpieczneHaslo2022'),
-('Julian','Korgol','Okopowa ',59,525,'Warszawa','10-000','headadmin','Linux',null,'1234567890'),
-('Oliwier','Bernatowicz','Wiejska ',69,420,'Warszawa','69-420','user','JavaScript',1, 'admin1'),
-('Mi�osz','Pierzak','Okopowa', 59,525,'Warszawa','10-000','admin','MapMaker',2, 'admin2')
+('Mateusz','Gontarek','Okopowa',59,525,'Warszawa','00-000','headadmin','Python',null, 'MojeSuperTajneiBezpieczneHaslo2022', 'MatGon'),
+('Julian','Korgol','Okopowa ',59,525,'Warszawa','10-000','headadmin','Linux',null,'1234567890','julia'),
+('Oliwier','Bernatowicz','Wiejska ',69,420,'Warszawa','69-420','user','JavaScript',1, 'admin1','Ollson'),
+('Mi�osz','Pierzak','Okopowa', 59,525,'Warszawa','10-000','user','MapMaker',2, 'admin2','Pierzak')
 
 INSERT INTO Zaloga VALUES
 (2,2),
