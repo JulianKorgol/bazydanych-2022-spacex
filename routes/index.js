@@ -17,7 +17,7 @@ async function login(req, res) {
     const result = await dbRequest
       .input('Login', sql.VarChar(50), login)
       .input('Haslo', sql.VarChar(50), password)
-      .query('SELECT Login FROM Uzytkownicy WHERE login = @Login AND haslo = @Haslo')
+      .query('SELECT login FROM Uzytkownik WHERE login = @Login AND haslo = @Haslo')
   
     if (result.rowsAffected[0] === 1) {
       req.session.userLogin = login;
