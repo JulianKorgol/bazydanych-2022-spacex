@@ -21,7 +21,7 @@ async function login(req, res) {
   
     if (result.rowsAffected[0] === 1) {
       req.session.userLogin = login;
-      showProducts(req, res);
+      homePage(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'})
     }
