@@ -44,9 +44,9 @@ function logout(req, res) {
 // SPACEX - funkcjonalności
 // Wyświetlanie załogi
 // Wyświetlanie listy misji
+// Logowanie
 // Tworzenie załogi - TODO
 // Tworzenie misji - TODO
-// Logowanie - TODO
 // Uprawnienia - TODO
 // Korzystanie z wzorców misji - TODO
 
@@ -104,5 +104,5 @@ router.get('/', homePage);
 router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
-
+router.post('/zalogaCreate', logout);
 module.exports = router;

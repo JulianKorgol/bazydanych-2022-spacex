@@ -24,7 +24,6 @@ async function login(req, res) {
     } catch (err) {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'})
     }
-  
   }
   
   function logout(req, res) {
