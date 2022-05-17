@@ -21,12 +21,17 @@ async function login(req, res) {
   
     if (result.rowsAffected[0] === 1) {
       req.session.userLogin = login;
+      if (['julia', 'MatGon'].includes(req.session.userLogin)) {
+        req.session.isSuperAdmin = true;
+      } else if (['MatGon'].includes(req.session.userLogin)) {
+        req.session.isAdmin = true;
+      }
       homePage(req, res);
     } else {
-      res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'})
+      res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
     }
   } catch (err) {
-    res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'})
+    res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
   }
 
 }
@@ -44,11 +49,11 @@ function logout(req, res) {
 // SPACEX - funkcjonalności
 // Wyświetlanie załogi
 // Wyświetlanie listy misji
-// Logowanie
-// Tworzenie załogi - TODO
+// Tworzenie użytkowników
+// Tworzenie załogi - TODO - Formularz i nieprzetestowana funkcja stworzone
 // Tworzenie misji - TODO
 // Logowanie
-// Uprawnienia - TODO
+// Uprawnienia - TODO - Funkcja isAdmin oraz isSuperAdmin stworzone, jednak problem z porównaniem w HBS
 // Korzystanie z wzorców misji - TODO
 
 
@@ -137,7 +142,7 @@ router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
 router.get('/zaloga', showCrew);
-router.post('/zalogaCreate', showFormCreateUser);
+router.get('/zalogaCreate', showFormCreateUser);
 router.post('/zalogaCreate', createUser);
 
 module.exports = router;
