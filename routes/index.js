@@ -121,7 +121,7 @@ async function createUser(req, res) {
         .input('Login', sql.VarChar(50), req.query.login)
         .query('INSERT INTO Uzytkownik (imie, nazwisko, ulica, numerDomu, numerMieszkania, miasto, kodPocztowy, rodzajUzytkownika, specjalizacja, SzefId, haslo, login) VALUES ' +
             '(@Imie, @Nazwisko, @Ulica, @NumerDomu, @NumerMieszkania, @Miasto, @KodPocztowy, @RodzajUzytkownika, @Specjalizacja, @SzefId, @Haslo, @Login)')
-
+    console.log(result)
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
   }
@@ -137,7 +137,7 @@ router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
 router.get('/zaloga', showCrew);
-router.post('/zalogaCreate', showFormCreateUser);
+router.get('/zalogaCreate', showFormCreateUser);
 router.post('/zalogaCreate', createUser);
 
 module.exports = router;
