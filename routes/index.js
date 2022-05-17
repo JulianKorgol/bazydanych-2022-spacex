@@ -38,7 +38,7 @@ async function homePage(req, res) {
 function logout(req, res) {
   req.session.destroy();
 
-  showProducts(req, res);
+  homePage(req, res);
 }
 
 // SPACEX - funkcjonalności
@@ -47,6 +47,7 @@ function logout(req, res) {
 // Logowanie
 // Tworzenie załogi - TODO
 // Tworzenie misji - TODO
+// Logowanie
 // Uprawnienia - TODO
 // Korzystanie z wzorców misji - TODO
 
@@ -57,7 +58,6 @@ async function showCrew(req, res) {
 
   try {
     const dbRequest = await request()
-    let crew;
 
     result = await dbRequest
         .query("SELECT * FROM Uzytkownik WHERE rodzajUzytkownika != 'headadmin' or rodzajUzytkownika != 'admin'")
@@ -67,9 +67,9 @@ async function showCrew(req, res) {
     console.error('Nie udało się pobrać listy załogi', err)
   }
 
-  res.render('index', {
+  res.render('zaloga', {
     title: 'Lista załogentów',
-    crewlist: crew,
+    crew: crew,
     message: res.message,
     userLogin: req.session?.userLogin
   })
@@ -81,7 +81,6 @@ async function showMissions(req, res) {
 
   try {
     const dbRequest = await request()
-    let missions;
 
     result = await dbRequest
         .query('SELECT * FROM Misja')
@@ -99,10 +98,46 @@ async function showMissions(req, res) {
   })
 }
 
+// Tworzenie załogi
+async function createUser(req, res) {
+  let user = []
+
+  try {
+    const dbRequest = await request()
+
+    result = await dbRequest
+        // VarChar - sprawdzenie limitów w bazie danych - TODO
+        .input('Imie', sql.VarChar(50), req.query.imie)
+        .input('Nazwisko', sql.VarChar(50), req.query.nazwisko)
+        .input('Ulica', sql.VarChar(50), req.query.ulica)
+        .input('NumerDomu', sql.VarChar(50), req.query.numerDomu)
+        .input('NumerMieszkania', sql.VarChar(50), req.query.numerMieszkania)
+        .input('Miasto', sql.VarChar(50), req.query.miasto)
+        .input('KodPocztowy', sql.VarChar(50), req.query.kodPocztowy)
+        .input('RodzajUzytkownika', sql.VarChar(50), req.query.rodzajUzytkownika)
+        .input('Specjalizacja', sql.VarChar(50), req.query.specjalizacja)
+        .input('SzefId', sql.VarChar(50), req.query.SzefId)
+        .input('Haslo', sql.VarChar(50), req.query.haslo)
+        .input('Login', sql.VarChar(50), req.query.login)
+        .query('INSERT INTO Uzytkownik (imie, nazwisko, ulica, numerDomu, numerMieszkania, miasto, kodPocztowy, rodzajUzytkownika, specjalizacja, SzefId, haslo, login) VALUES ' +
+            '(@Imie, @Nazwisko, @Ulica, @NumerDomu, @NumerMieszkania, @Miasto, @KodPocztowy, @RodzajUzytkownika, @Specjalizacja, @SzefId, @Haslo, @Login)')
+
+  } catch (err) {
+    console.error('Nie udało się dodać użytkownika.', err)
+  }
+}
+
+async function showFormCreateUser(req, res) {
+  res.render('zalogaCreate')
+}
+
 
 router.get('/', homePage);
 router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
-router.post('/zalogaCreate', logout);
+router.get('/zaloga', showCrew);
+router.post('/zalogaCreate', showFormCreateUser);
+router.post('/zalogaCreate', createUser);
+
 module.exports = router;
