@@ -38,7 +38,7 @@ async function homePage(req, res) {
 function logout(req, res) {
   req.session.destroy();
 
-  showProducts(req, res);
+  homePage(req, res);
 }
 
 // SPACEX - funkcjonalności
@@ -57,7 +57,6 @@ async function showCrew(req, res) {
 
   try {
     const dbRequest = await request()
-    let crew;
 
     result = await dbRequest
         .query("SELECT * FROM Uzytkownik WHERE rodzajUzytkownika != 'headadmin' or rodzajUzytkownika != 'admin'")
@@ -67,9 +66,9 @@ async function showCrew(req, res) {
     console.error('Nie udało się pobrać listy załogi', err)
   }
 
-  res.render('index', {
+  res.render('zaloga', {
     title: 'Lista załogentów',
-    crewlist: crew,
+    crew: crew,
     message: res.message,
     userLogin: req.session?.userLogin
   })
@@ -104,5 +103,6 @@ router.get('/', homePage);
 router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
+router.get('/zaloga', showCrew)
 
 module.exports = router;

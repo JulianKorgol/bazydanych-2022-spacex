@@ -1,0 +1,13 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{#each crew}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.imie}}</td>
+                    <td>{{this.nazwisko}}</td>
+                </tr>
+            {{/each}}
+        </div>
+    </div>
+</nav>
