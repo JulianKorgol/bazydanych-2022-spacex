@@ -23,10 +23,10 @@ async function connect() {
             pool = sql.connect(sqlConfig)
         } catch (err) {
             console.error('Nieudane połączenie z bazą danych', err)
-    
+
             throw err
         }
-    } 
+    }
 
     return pool
 }
