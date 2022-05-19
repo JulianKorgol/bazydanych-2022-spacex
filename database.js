@@ -9,7 +9,7 @@ const sqlConfig = {
   password: DB_PWD,
   database: DB_NAME,
   server: 'localhost',
-    port: 1433,
+  port: 1433,
   options: {
     trustServerCertificate: true
   }

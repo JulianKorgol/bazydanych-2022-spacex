@@ -104,7 +104,6 @@ async function createUser(req, res) {
 
   try {
     const dbRequest = await request()
-
     result = await dbRequest
         // VarChar - sprawdzenie limitów w bazie danych - TODO
         .input('Imie', sql.VarChar(50), req.query.imie)
@@ -121,7 +120,6 @@ async function createUser(req, res) {
         .input('Login', sql.VarChar(50), req.query.login)
         .query('INSERT INTO Uzytkownik (imie, nazwisko, ulica, numerDomu, numerMieszkania, miasto, kodPocztowy, rodzajUzytkownika, specjalizacja, SzefId, haslo, login) VALUES ' +
             '(@Imie, @Nazwisko, @Ulica, @NumerDomu, @NumerMieszkania, @Miasto, @KodPocztowy, @RodzajUzytkownika, @Specjalizacja, @SzefId, @Haslo, @Login)')
-    console.log(result)
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
   }
