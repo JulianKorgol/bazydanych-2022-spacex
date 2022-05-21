@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="476e4757-278a-48e6-9a3b-f7fc73a1a6cc" name="Changes" comment="IF admin">
+    <list default="true" id="476e4757-278a-48e6-9a3b-f7fc73a1a6cc" name="Changes" comment="showUsers(), showExamples(), createMission()">
+      <change afterPath="$PROJECT_DIR$/public/fonts/FontAwesome.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/about/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/about/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/about/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/about/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/header-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/1-full.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/1-thumbnail.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/2-full.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/2-thumbnail.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/3-full.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/3-thumbnail.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/4-full.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/5-full.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/portfolio/6-full.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/team/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/team/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/agency.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/stylesheets/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/stylesheets/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/deleted.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/logo.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/layout.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/new-product.hbs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -41,16 +67,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="nodejs" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
       <method v="2" />
@@ -86,7 +112,13 @@
       <workItem from="1652274298196" duration="32000" />
       <workItem from="1652298737354" duration="1314000" />
       <workItem from="1652300066128" duration="6000" />
-      <workItem from="1652338940581" duration="744000" />
+      <workItem from="1652338940581" duration="4554000" />
+      <workItem from="1652727730672" duration="1231000" />
+      <workItem from="1652729026045" duration="358000" />
+      <workItem from="1652771045137" duration="5367000" />
+      <workItem from="1652943325503" duration="5720000" />
+      <workItem from="1653145210916" duration="1126000" />
+      <workItem from="1653147842904" duration="1040000" />
     </task>
     <task id="LOCAL-00001" summary="Catalog fix">
       <created>1649146935715</created>
@@ -144,7 +176,105 @@
       <option name="project" value="LOCAL" />
       <updated>1652299701510</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Przystosowanie strony pod stronę SPACEX">
+      <created>1652339740271</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1652339740271</updated>
+    </task>
+    <task id="LOCAL-00010" summary="TODO index.js">
+      <created>1652340040172</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1652340040172</updated>
+    </task>
+    <task id="LOCAL-00011" summary="showCrew() and showMissions()">
+      <created>1652341201420</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1652341201420</updated>
+    </task>
+    <task id="LOCAL-00012" summary="render - showCrew() and showMissions()">
+      <created>1652343016730</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1652343016730</updated>
+    </task>
+    <task id="LOCAL-00013" summary="login fix">
+      <created>1652343780641</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1652343780641</updated>
+    </task>
+    <task id="LOCAL-00014" summary="login fix">
+      <created>1652728685649</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652728685650</updated>
+    </task>
+    <task id="LOCAL-00015" summary="login fix">
+      <created>1652729370027</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652729370027</updated>
+    </task>
+    <task id="LOCAL-00016" summary="zaloga print init">
+      <created>1652772862388</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1652772862388</updated>
+    </task>
+    <task id="LOCAL-00017" summary="createUser() and showFormCreateUser()">
+      <created>1652774305941</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1652774305941</updated>
+    </task>
+    <task id="LOCAL-00018" summary="TODO - updated">
+      <created>1652776732000</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1652776732000</updated>
+    </task>
+    <task id="LOCAL-00019" summary="createUser() updated">
+      <created>1652944151828</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1652944151828</updated>
+    </task>
+    <task id="LOCAL-00020" summary="createUser() updated">
+      <created>1652946173965</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1652946173965</updated>
+    </task>
+    <task id="LOCAL-00021" summary="createUser() - done without rendering answer">
+      <created>1652949476741</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1652949476741</updated>
+    </task>
+    <task id="LOCAL-00022" summary="showUsers(), showExamples(), createMission()">
+      <created>1653146324632</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1653146324632</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +301,28 @@
     <MESSAGE value="Komentarze - podział pliku index.js" />
     <MESSAGE value="Login update" />
     <MESSAGE value="IF admin" />
-    <option name="LAST_COMMIT_MESSAGE" value="IF admin" />
+    <MESSAGE value="Przystosowanie strony pod stronę SPACEX" />
+    <MESSAGE value="TODO index.js" />
+    <MESSAGE value="showCrew() and showMissions()" />
+    <MESSAGE value="render - showCrew() and showMissions()" />
+    <MESSAGE value="login fix" />
+    <MESSAGE value="zaloga print init" />
+    <MESSAGE value="createUser() and showFormCreateUser()" />
+    <MESSAGE value="TODO - updated" />
+    <MESSAGE value="createUser() updated" />
+    <MESSAGE value="createUser() - done without rendering answer" />
+    <MESSAGE value="showUsers(), showExamples(), createMission()" />
+    <option name="LAST_COMMIT_MESSAGE" value="showUsers(), showExamples(), createMission()" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/index.js</url>
+          <line>155</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
