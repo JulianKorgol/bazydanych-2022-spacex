@@ -1,5 +1,6 @@
 const express = require('express')
 const req = require('express/lib/request')
+const async = require('hbs/lib/async')
 const sql = require('mssql')
 const router = express.Router()
 const { request } = require('../database')
@@ -26,7 +27,7 @@ async function login(req, res) {
       } else if (['MatGon'].includes(req.session.userLogin)) {
         req.session.isAdmin = true;
       }
-      homePage(req, res);
+      showMissions(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
     }
@@ -79,23 +80,20 @@ async function showCrew(req, res) {
     userLogin: req.session?.userLogin
   })
 }
-
 // Wyświetlanie listy misji
 async function showMissions(req, res) {
   let missions = []
-
   try {
     const dbRequest = await request()
 
     result = await dbRequest
         .query('SELECT * FROM Misja')
-
     missions = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać listy misji.', err)
   }
-
-  res.render('index', {
+  console.log(missions)
+  res.render('misja', {
     title: 'Lista misji',
     missions: missions,
     message: res.message,
@@ -103,6 +101,9 @@ async function showMissions(req, res) {
   })
 }
 
+async function Misja(req, res) {
+  res.render('misja')
+}
 // Tworzenie załogi
 async function createUser(req, res) {
   let user = []
@@ -135,12 +136,13 @@ async function showFormCreateUser(req, res) {
 }
 
 
-router.get('/', homePage);
+
 router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
 router.get('/zaloga', showCrew);
 router.get('/zalogaCreate', showFormCreateUser);
 router.post('/zalogaCreate', createUser);
-
+router.get('/Misja', Misja);
+router.get('/', showMissions)
 module.exports = router;

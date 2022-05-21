@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{#if userLogin}}
+        {{#each missions}}
+        <div>
+            <h1>{{this.nazwa}}</h1>
+            <p>
+                {{this.opis}} 
+            </p>
+            <h4>Status: {{this.status}}</h4>
+            <h4>Termin Rozpoczęcia: {{this.terminRozpoczecia}}</h4>
+            <h4>Termin Zakończenia: {{this.terminZakonczenia}}</h4>
+            <h2>Astronauci:</h2>
+            <ul> 
+                {{#each astronauta}}
+                <li>
+                    {{this.imie}} {{this.nazwisko}} 
+                    <br>
+                    {{this.specjalizacja}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/each}}
+    {{/if}}
+    <style>
+        body {
+            font-size: 15px;
+        }
+        h2 {
+            font-size: 21px;
+            font-weight: 600;
+        }
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        div {
+            background-color: #fefefe;
+        }
+    </style>
+</body>
+</html>
