@@ -212,4 +212,9 @@ router.get('/zalogaCreate', showFormCreateUser);
 router.post('/zalogaCreate', createUser);
 router.get('/Misja', Misja);
 router.get('/', showMissions)
+// na razie dałem tak bo index się nie wyświetlał i nie wiem dlaczego\
+// i dałem to co zrobiłeś na podstronę i mozemy zrobić prostą if która sprawdza czy nie jesteś zalogowanym i przerzuca się na podstrone poniżej
+// Sory za błedy gramatyczne
+// programista nie umie pisać bez autokorekty
+router.get('/oNas', homePage)
 module.exports = router;
