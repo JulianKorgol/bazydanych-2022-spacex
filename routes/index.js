@@ -27,7 +27,7 @@ async function login(req, res) {
       } else if (['MatGon'].includes(req.session.userLogin)) {
         req.session.isAdmin = true;
       }
-      showMissions(req, res);
+      panel(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
     }
@@ -202,19 +202,18 @@ async function showFormCreateUser(req, res) {
   res.render('zalogaCreate')
 }
 
+async function panel(req, res) {
+  res.render('panel')
+}
 
 
 router.get('/login', showLoginForm);
 router.post('/login', login);
 router.post('/logout', logout);
-router.get('/zaloga', showCrew);
-router.get('/zalogaCreate', showFormCreateUser);
-router.post('/zalogaCreate', createUser);
-router.get('/Misja', Misja);
-router.get('/', showMissions)
-// na razie dałem tak bo index się nie wyświetlał i nie wiem dlaczego\
-// i dałem to co zrobiłeś na podstronę i mozemy zrobić prostą if która sprawdza czy nie jesteś zalogowanym i przerzuca się na podstrone poniżej
-// Sory za błedy gramatyczne
-// programista nie umie pisać bez autokorekty
-router.get('/oNas', homePage)
+router.get('/uzytkownicy', showCrew);
+router.get('/utworzUzytkownika', showFormCreateUser);
+router.post('/utworzUzytkownika', createUser);
+router.get('/misja', Misja);
+router.get('/', homePage)
+router.get('/panel', panel)
 module.exports = router;

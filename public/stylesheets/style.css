@@ -1,0 +1,11 @@
+.centerPanel {
+    justify-content: center;
+    margin-left: 40%;
+}
+.panelSelf {
+    display: flex;
+    margin-bottom: 30px;
+}
+.panelSelf a {
+    margin-right: 10px;
+}
