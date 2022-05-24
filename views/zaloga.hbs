@@ -1,16 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {{#each crew}}
-                <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.imie}}</td>
-                    <td>{{this.nazwisko}}</td>
-                </tr>
-            {{/each}}
-            {{#if isSuperAdmin}}
-                <h1>Hello World</h1>
-            {{/if}}
-        </div>
+<h1 class="title">Użytkownicy</h1>
+<table>
+    <th>ID</th>
+    <th>Imie</th>
+    <th>Nazwisko</th>
+{{#each crew}}
+    <div class="zalogaUser">
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.imie}}</td>
+            <td>{{this.nazwisko}}</td>
+        </tr>
     </div>
-</nav>
+{{/each}}
+</table>
+{{#if isSuperAdmin}}
+    <h1>Hello World</h1>
+{{/if}}
+
+<div class="text-center" style="margin-top: 3%">
+    <a href="/panel">Powrót</a>
+</div>

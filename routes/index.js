@@ -74,7 +74,6 @@ async function showCrew(req, res) {
   }
 
   res.render('zaloga', {
-    title: 'Lista załogentów',
     crew: crew,
     message: res.message,
     userLogin: req.session?.userLogin
@@ -95,6 +94,7 @@ async function showMissions(req, res) {
   console.log(missions)
   res.render('misja', {
     title: 'Lista misji',
+    missions: missions,
     message: res.message,
     userLogin: req.session?.userLogin
   })
@@ -213,7 +213,8 @@ router.post('/logout', logout);
 router.get('/uzytkownicy', showCrew);
 router.get('/utworzUzytkownika', showFormCreateUser);
 router.post('/utworzUzytkownika', createUser);
-router.get('/misja', Misja);
+router.get('/StworzMisje', Misja);
+router.get('/misje', showMissions)
 router.get('/', homePage)
 router.get('/panel', panel)
 module.exports = router;

@@ -3,9 +3,9 @@
     {{error}}
   </div>
 {{/if}}
-<form action="" method="POST">
+<form action="" method="POST" class="formularzTworzeniaUzytkownika">
   <div class="mb-3">
-    <label for="imie" class="form-label">Imie</label>
+    <label for="imie" class="form-label">Imie*</label>
     <input
       type="text"
       class="form-control"
@@ -15,7 +15,7 @@
     />
   </div>
   <div class="mb-3">
-    <label for="nazwisko" class="form-label">Nazwisko</label>
+    <label for="nazwisko" class="form-label">Nazwisko*</label>
     <input
       type="text"
       class="form-control"
@@ -25,7 +25,7 @@
     />
   </div>
   <div class="mb-3">
-    <label for="ulica" class="form-label">Ulica</label>
+    <label for="ulica" class="form-label">Ulica*</label>
     <input
       type="text"
       class="form-control"
@@ -35,7 +35,7 @@
     />
   </div>
   <div class="mb-3">
-    <label for="numerDomu" class="form-label">Numer Domu</label>
+    <label for="numerDomu" class="form-label">Numer Domu*</label>
     <input
       type="text"
       class="form-control"
@@ -51,11 +51,10 @@
       class="form-control"
       name="numerMieszkania"
       id="numerMieszkania"
-      required
     />
   </div>
   <div class="mb-3">
-    <label for="miasto" class="form-label">Miasto</label>
+    <label for="miasto" class="form-label">Miasto*</label>
     <input
       type="text"
       class="form-control"
@@ -65,7 +64,7 @@
     />
     </div>
     <div class="mb-3">
-    <label for="kodPocztowy" class="form-label">Kod Pocztowy</label>
+    <label for="kodPocztowy" class="form-label">Kod Pocztowy*</label>
     <input
       type="text"
       class="form-control"
@@ -75,7 +74,7 @@
     />
   </div>
   <div class="mb-3">
-    <label for="rodzajUzytkownika" class="form-label">Rodzaj Użytkownika</label>
+    <label for="rodzajUzytkownika" class="form-label">Rodzaj Użytkownika*</label>
     <input
       type="text"
       class="form-control"
@@ -91,7 +90,6 @@
       class="form-control"
       name="specjalizacja"
       id="specjalizacja"
-      required
     />
   </div>
   <div class="mb-3">
@@ -104,9 +102,9 @@
     />
   </div>
   <div class="mb-3">
-    <label for="haslo" class="form-label">Haslo</label>
+    <label for="haslo" class="form-label">Haslo*</label>
     <input
-      type="text"
+      type="password"
       class="form-control"
       name="haslo"
       id="haslo"
@@ -114,7 +112,7 @@
     />
   </div>
     <div class="mb-3">
-    <label for="login" class="form-label">Login</label>
+    <label for="login" class="form-label">Login*</label>
     <input
       type="text"
       class="form-control"
@@ -127,6 +125,6 @@
     <button class="btn btn-lg btn-primary">Stwórz</button>
   </div>
   <div class="text-center">
-    <a href="/">Powrót</a>
+    <a href="/panel">Powrót</a>
   </div>
 </form>
