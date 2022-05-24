@@ -122,7 +122,9 @@ async function showDetailsOfMission(req, res) {
     mission: mission,
     zalogent: zalogent,
     message: res.message,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
   })
 }
 
