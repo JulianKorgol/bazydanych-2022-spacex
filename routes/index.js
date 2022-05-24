@@ -102,6 +102,7 @@ async function showMissions(req, res) {
 //Wyświetlanie szczegółów misji
 async function showDetailsOfMission(req, res) {
   let mission = []
+  let zalogent = []
   try {
     const dbRequest = await request()
 
@@ -116,7 +117,7 @@ async function showDetailsOfMission(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
-  console.log(missions)
+  console.log(mission)
   res.render('misjaSzczegoly', {
     mission: mission,
     zalogent: zalogent,
@@ -246,7 +247,7 @@ router.get('/StworzMisje', Misja);
 //Wyświetlanie misji
 router.get('/misje', showMissions)
 //Wyświetlanie szczegółów misji
-router.get('misjaSzczegoly', showDetailsOfMission)
+router.get('/misjaSzczegoly', showDetailsOfMission)
 //Strona główna
 router.get('/', homePage)
 //Panel
