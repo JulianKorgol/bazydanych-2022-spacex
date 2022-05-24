@@ -93,7 +93,6 @@ async function showMissions(req, res) {
   }
   console.log(missions)
   res.render('misja', {
-    title: 'Lista misji',
     missions: missions,
     message: res.message,
     userLogin: req.session?.userLogin
