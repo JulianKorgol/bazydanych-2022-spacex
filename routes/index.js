@@ -206,15 +206,22 @@ async function panel(req, res) {
   res.render('panel')
 }
 
-
+//Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
+//Wylogowywanie
 router.post('/logout', logout);
+//Wyświetlanie użytkowników
 router.get('/uzytkownicy', showCrew);
+//Tworzenie użytkowników
 router.get('/utworzUzytkownika', showFormCreateUser);
 router.post('/utworzUzytkownika', createUser);
+//Tworzenie misji
 router.get('/StworzMisje', Misja);
+//Wyświetlanie misji
 router.get('/misje', showMissions)
+//Strona główna
 router.get('/', homePage)
+//Panel
 router.get('/panel', panel)
 module.exports = router;
