@@ -8,27 +8,26 @@
 </head>
 <body>
     {{#if userLogin}}
+    <table>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Status</th>
+        <th>Termin Rozpoczęcia</th>
+        <th>Termin Zakończenia</th>
         {{#each missions}}
-        <div>
-            <h1>{{this.nazwa}}</h1>
-            <p>
-                {{this.opis}} 
-            </p>
-            <h4>Status: {{this.status}}</h4>
-            <h4>Termin Rozpoczęcia: {{this.terminRozpoczecia}}</h4>
-            <h4>Termin Zakończenia: {{this.terminZakonczenia}}</h4>
-            <h2>Astronauci:</h2>
-            <ul> 
-                {{#each astronauta}}
-                <li>
-                    {{this.imie}} {{this.nazwisko}} 
-                    <br>
-                    {{this.specjalizacja}}
-                </li>
-                {{/each}}
-            </ul>
-        </div>
+            <div class="Misje">
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.nazwa}}</td>
+                    <td>{{this.opis}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.terminRozpoczecia}}</td>
+                    <td>{{this.terminZakonczenia}}</td>
+                </tr>
+            </div>
         {{/each}}
+    </table>
     {{/if}}
     <style>
         body {
