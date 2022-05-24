@@ -99,6 +99,32 @@ async function showMissions(req, res) {
   })
 }
 
+//Wyświetlanie szczegółów misji
+async function showDetailsOfMission(req, res) {
+  let mission = []
+  try {
+    const dbRequest = await request()
+
+    result = await dbRequest
+        .input('ID', sql.INT, req.query.id)
+        .query('SELECT * FROM Misja WHERE id = @ID')
+    mission = result.recordset
+    result = await dbRequest
+        .input('ID', sql.INT, req.query.id)
+        .query('SELECT * FROM Uzytkownik JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Z.idMisja = @ID')
+    zalogent = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów misji.', err)
+  }
+  console.log(missions)
+  res.render('misjaSzczegoly', {
+    mission: mission,
+    zalogent: zalogent,
+    message: res.message,
+    userLogin: req.session?.userLogin
+  })
+}
+
 // Wyświetlanie listy użytkowników
 async function showUsers(req, res) {
   let missions = []
@@ -219,6 +245,8 @@ router.post('/utworzUzytkownika', createUser);
 router.get('/StworzMisje', Misja);
 //Wyświetlanie misji
 router.get('/misje', showMissions)
+//Wyświetlanie szczegółów misji
+router.get('misjaSzczegoly', showDetailsOfMission)
 //Strona główna
 router.get('/', homePage)
 //Panel
