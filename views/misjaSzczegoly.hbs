@@ -3,6 +3,7 @@
         {{#each mission}}
             <h1 class="title">Szczegóły misji {{this.nazwa}}</h1>
             <div class="Misje">
+        {{/each}}
         <table>
             <th>ID</th>
             <th>Pełna nazwa</th>
@@ -10,6 +11,7 @@
             <th>Status misji</th>
             <th>Termin Rozpoczęcia</th>
             <th>Termin Zakończenia</th>
+        {{#each mission}}
             <tr>
                 <td>{{this.id}}</td>
                 <td>{{this.nazwa}}</td>
@@ -18,16 +20,16 @@
                 <td>{{this.terminRozpoczecia}}</td>
                 <td>{{this.terminZakonczenia}}</td>
             </tr>
-        </table>
         {{/each}}
+        </table>
         <table>
             <th>ID</th>
             <th>Imie</th>
             <th>Nazwisko</th>
             <th>Miejsce Zamieszkania</th>
             <th>Specjalizacja</th>
-            <tr>
         {{#each zalogent}}
+            <tr>
                 <td>{{this.idUzytkownik}}</td>
                 <td>{{this.imie}}</td>
                 <td>{{this.nazwisko}}</td>
