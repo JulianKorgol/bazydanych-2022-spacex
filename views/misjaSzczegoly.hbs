@@ -2,43 +2,50 @@
     {{#if userLogin}}
         {{#each mission}}
             <h1 class="title">Szczegóły misji {{this.nazwa}}</h1>
-            <div class="Misje">
         {{/each}}
+        <div class="Misje">
+            <table>
+                <th>ID</th>
+                <th>Pełna nazwa</th>
+                <th>Opis misji</th>
+                <th>Status misji</th>
+                <th>Termin Rozpoczęcia</th>
+                <th>Termin Zakończenia</th>
+                {{#each mission}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.nazwa}}</td>
+                        <td>{{this.opis}}</td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.terminRozpoczecia}}</td>
+                        <td>{{this.terminZakonczenia}}</td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
         <table>
-            <th>ID</th>
-            <th>Pełna nazwa</th>
-            <th>Opis misji</th>
-            <th>Status misji</th>
-            <th>Termin Rozpoczęcia</th>
-            <th>Termin Zakończenia</th>
-        {{#each mission}}
+            <thead>
             <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.nazwa}}</td>
-                <td>{{this.opis}}</td>
-                <td>{{this.status}}</td>
-                <td>{{this.terminRozpoczecia}}</td>
-                <td>{{this.terminZakonczenia}}</td>
+                <th>ID</th>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>Miejsce Zamieszkania</th>
+                <th>Specjalizacja</th>
             </tr>
-        {{/each}}
+            </thead>
+            {{#each zalogent}}
+                <tr>
+                    <td>{{this.idUzytkownik}}</td>
+                    <td>{{this.imie}}</td>
+                    <td>{{this.nazwisko}}</td>
+                    <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
+                    <td>{{this.specjalizacja}}</td>
+                </tr>
+            {{/each}}
         </table>
-        <table>
-            <th>ID</th>
-            <th>Imie</th>
-            <th>Nazwisko</th>
-            <th>Miejsce Zamieszkania</th>
-            <th>Specjalizacja</th>
-        {{#each zalogent}}
-            <tr>
-                <td>{{this.idUzytkownik}}</td>
-                <td>{{this.imie}}</td>
-                <td>{{this.nazwisko}}</td>
-                <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
-                <td>{{this.specjalizacja}}</td>
-            </tr>
-        {{/each}}
     {{/if}}
-    <a class="btn btn-primary btn-xl text-uppercase" role="button" href="/login" style="margin-right: 3%;">Dodaj załogentów</a>
+    <a class="btn btn-primary btn-xl text-uppercase" role="button" href="/login" style="margin-right: 3%;">Dodaj
+        załogentów</a>
 </div>
 <div class="text-center" style="margin-top: 3%">
     <a href="/panel">Powrót</a>
