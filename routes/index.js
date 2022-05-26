@@ -106,7 +106,7 @@ async function showDetailsOfMission(req, res) {
     const dbRequest = await request()
     result = await dbRequest
         .input('ID', sql.Int, req.query.id)
-        .query('SELECT id, nazwa FROM misja WHERE id = @ID')
+        .query('SELECT * FROM misja WHERE id = @ID')
     mission = result.recordset
 
     result = await dbRequest
