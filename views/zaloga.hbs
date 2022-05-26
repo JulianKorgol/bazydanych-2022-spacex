@@ -1,20 +1,22 @@
-<h1 class="title">Użytkownicy</h1>
-<table>
-    <th>ID</th>
-    <th>Imie</th>
-    <th>Nazwisko</th>
-{{#each crew}}
-    <div class="zalogaUser">
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.imie}}</td>
-            <td>{{this.nazwisko}}</td>
-        </tr>
-    </div>
-{{/each}}
-</table>
-{{#if isSuperAdmin}}
-    <h1>Hello World</h1>
+{{#if userLogin}}
+    <h1 class="title">Użytkownicy</h1>
+    <table>
+        <th>ID</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+    {{#each crew}}
+        <div class="zalogaUser">
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.imie}}</td>
+                <td>{{this.nazwisko}}</td>
+            </tr>
+        </div>
+    {{/each}}
+    </table>
+    {{#if isSuperAdmin}}
+        <h1>Hello World</h1>
+    {{/if}}
 {{/if}}
 
 <div class="text-center" style="margin-top: 3%">

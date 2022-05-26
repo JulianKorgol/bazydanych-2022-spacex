@@ -173,7 +173,7 @@ async function showExamples(req, res) {
 }
 
 async function Misja(req, res) {
-  res.render('misja')
+  res.render('misja', {userLogin: req.session?.userLogin})
 }
 // Tworzenie załogi
 async function createUser(req, res) {
@@ -226,11 +226,11 @@ async function createMission(req, res) {
 }
 
 async function showFormCreateUser(req, res) {
-  res.render('zalogaCreate')
+  res.render('zalogaCreate', {userLogin: req.session?.userLogin})
 }
 
 async function panel(req, res) {
-  res.render('panel')
+  res.render('panel', {userLogin: req.session?.userLogin})
 }
 
 //Logowanie
