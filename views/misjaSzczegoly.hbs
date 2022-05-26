@@ -1,38 +1,26 @@
-<h1 class="title">Szczegóły misji {{this.id}}</h1>
-<h2>{{this.nazwa}}</h2>
-{{#if userLogin}}
-    <table>
-        <th>ID</th>
-        <th>Nazwa</th>
-        <th>Opis</th>
-        <th>Status</th>
-        <th>Termin Rozpoczęcia</th>
-        <th>Termin Zakończenia</th>
+<div>
+    {{#if userLogin}}
         {{#each mission}}
-            <div class="Misje">
-                <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.nazwa}}</td>
-                    <td>{{this.opis}}</td>
-                    <td>{{this.status}}</td>
-                    <td>{{this.terminRozpoczecia}}</td>
-                    <td>{{this.terminZakonczenia}}</td>
-                </tr>
-            </div>
+            <h1 class="title">Szczegóły misji {{this.id}}</h1>
+            <h2 class="title">{{this.nazwa}}</h2>
         {{/each}}
-    </table>
-    <h2>Lista załogentów</h2>
-    {{#each zalogent}}
-        <div class="Misje">
+        <table>
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Miejsce Zamieszkania</th>
+            <th>Specjalizacja</th>
             <tr>
-                <td>{{this.id}}</td>
+        {{#each zalogent}}
+                <td>{{this.idUzytkownik}}</td>
                 <td>{{this.imie}}</td>
                 <td>{{this.nazwisko}}</td>
+                <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
+                <td>{{this.specjalizacja}}</td>
             </tr>
-        </div>
-    {{/each}}
-{{/if}}
-
+        {{/each}}
+    {{/if}}
+</div>
 <div class="text-center" style="margin-top: 3%">
     <a href="/panel">Powrót</a>
 </div>

@@ -101,26 +101,25 @@ async function showMissions(req, res) {
 
 //Wyświetlanie szczegółów misji
 async function showDetailsOfMission(req, res) {
-  let mission = []
   let zalogent = []
   try {
     const dbRequest = await request()
+    result = await dbRequest
+        .input('ID', sql.Int, req.query.id)
+        .query('SELECT id, nazwa FROM misja WHERE id = @ID')
+    mission = result.recordset
 
     result = await dbRequest
-        .input('ID', sql.INT, req.query.id)
-        .query('SELECT * FROM Misja WHERE id = @ID')
-    mission = result.recordset
-    result = await dbRequest
-        .input('ID', sql.INT, req.query.id)
-        .query('SELECT * FROM Uzytkownik JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Z.idMisja = @ID')
+        .input('Idi', sql.Int, req.query.id)
+        .query('SELECT * FROM Uzytkownik JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Z.idMisja = @Idi')
     zalogent = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
-  console.log(mission)
+  console.log(zalogent)
   res.render('misjaSzczegoly', {
-    mission: mission,
     zalogent: zalogent,
+    mission: mission,
     message: res.message,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
