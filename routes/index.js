@@ -217,12 +217,12 @@ async function createMission(req, res) {
         .input('terminRozpoczecia', sql.DateTime, req.body.misjaTerminRozpoczecia)
         .input('terminZakonczenia', sql.DateTime, req.body.misjaTerminZakonczenia)
         .input('WzorzecId', sql.VarChar(50), parseInt(req.body.misjaWzorzecId))
-        .query('INSERT INTO Misja (imie, nazwisko, ulica, numerDomu, numerMieszkania, miasto, kodPocztowy, rodzajUzytkownika, specjalizacja, SzefId, haslo, login) VALUES ' +
-            '(@Nazwa, @Opis, @Status, @terminRozpoczecia, @terminZakonczenia, @WzorzecId)')
+        .query('INSERT INTO Misja (nazwa, opis, status, terminRozpoczecia, terminZakonczenia) VALUES ' +
+            '(@Nazwa, @Opis, @Status, @terminRozpoczecia, @terminZakonczenia)')
   } catch (err) {
-    console.error('Nie udało się dodać użytkownika.', err)
+    console.error('Nie udało się dodać misji.', err)
   }
-  res.render('userCreate', {error: 'Dodano użytkownika.'})
+  res.render('missionCreate', {error: 'Dodano misje.'})
 }
 
 async function showFormCreateUser(req, res) {
@@ -245,6 +245,7 @@ router.get('/utworzUzytkownika', showFormCreateUser);
 router.post('/utworzUzytkownika', createUser);
 //Tworzenie misji
 router.get('/StworzMisje', showMisjaCreateForm);
+router.post('/StworzMisje', createMission);
 //Wyświetlanie misji
 router.get('/misje', showMissions)
 //Wyświetlanie szczegółów misji
