@@ -1,49 +1,58 @@
-{{#if userLogin}}
-    <form action="" method="POST" class="formularzTworzeniaMisji">
-        <div class="mb-3">
-            <label for="nazwa" class="form-label">Nazwa*</label>
-            <input
-            type="text"
-            class="form-control"
-            name="nazwa"
-            id="nazwa"
-            required
-            />
-        </div>
-        <div class="mb-3">
-            <label for="opis" class="form-label">Opis*</label>
-            <textarea
-            type="textarea"
-            class="form-control"
-            name="opis"
-            id="opis"
-            required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="terminRozpoczecia" class="form-label">Termin Rozpoczęcia*</label>
-            <input
-            type="date"
-            class="form-control"
-            name="terminRozpoczecia"
-            id="terminRozpoczecia"
-            required
-            />
-        </div>
-        <div class="mb-3">
-            <label for="terminZakonczenia" class="form-label">Termin Zakończenia (planowany)*</label>
-            <input
-            type="date"
-            class="form-control"
-            name="terminZakonczenia"
-            id="terminZakonczenia"
-            required
-            />
-        </div>
-        <div class="text-center mb-3">
-            <button class="btn btn-lg btn-primary">Stwórz</button>
-        </div>
-    </form>
-{{/if}}
-<div class="text-center">
-    <a href="/panel">Powrót</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="title">Lista Misji</h1>
+    {{#if userLogin}}
+    <table>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Status</th>
+        <th>Termin Rozpoczęcia</th>
+        <th>Termin Zakończenia</th>
+        <th></th>
+        {{#each missions}}
+            <div class="Misje">
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.nazwa}}</td>
+                    <td>{{this.opis}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.terminRozpoczecia}}</td>
+                    <td>{{this.terminZakonczenia}}</td>
+                    <td><a href="misjaSzczegoly?id={{this.id}}">Szczegóły</a></td>
+                </tr>
+            </div>
+        {{/each}}
+    </table>
+    {{/if}}
+    <style>
+        body {
+            font-size: 15px;
+        }
+        h2 {
+            font-size: 21px;
+            font-weight: 600;
+        }
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        div {
+            background-color: #fefefe;
+        }
+        td {
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid #111;
+        }
+
+    </style>
+</body>
+</html>

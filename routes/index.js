@@ -172,8 +172,8 @@ async function showExamples(req, res) {
   })
 }
 
-async function Misja(req, res) {
-  res.render('misja', {userLogin: req.session?.userLogin})
+async function showMisjaCreateForm(req, res) {
+  res.render('misjaCreate', {userLogin: req.session?.userLogin})
 }
 // Tworzenie załogi
 async function createUser(req, res) {
@@ -244,7 +244,7 @@ router.get('/uzytkownicy', showCrew);
 router.get('/utworzUzytkownika', showFormCreateUser);
 router.post('/utworzUzytkownika', createUser);
 //Tworzenie misji
-router.get('/StworzMisje', Misja);
+router.get('/StworzMisje', showMisjaCreateForm);
 //Wyświetlanie misji
 router.get('/misje', showMissions)
 //Wyświetlanie szczegółów misji
