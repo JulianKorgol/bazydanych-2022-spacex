@@ -73,7 +73,7 @@ async function showCrew(req, res) {
     console.error('Nie udało się pobrać listy załogi', err)
   }
 
-  res.render('zaloga', {
+  res.render('user', {
     crew: crew,
     message: res.message,
     userLogin: req.session?.userLogin
@@ -201,7 +201,7 @@ async function createUser(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
   }
-  res.render('zalogaCreate', {error: 'Dodano użytkownika.'})
+  res.render('userCreate', {error: 'Dodano użytkownika.'})
 }
 
 // Tworzenie misji
@@ -222,11 +222,11 @@ async function createMission(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
   }
-  res.render('zalogaCreate', {error: 'Dodano użytkownika.'})
+  res.render('userCreate', {error: 'Dodano użytkownika.'})
 }
 
 async function showFormCreateUser(req, res) {
-  res.render('zalogaCreate', {userLogin: req.session?.userLogin})
+  res.render('userCreate', {userLogin: req.session?.userLogin})
 }
 
 async function panel(req, res) {
