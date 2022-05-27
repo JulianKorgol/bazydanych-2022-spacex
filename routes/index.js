@@ -211,18 +211,17 @@ async function createMission(req, res) {
   try {
     const dbRequest = await request()
     result = await dbRequest
-        .input('Nazwa', sql.VarChar(150), req.body.misjaNazwa)
-        .input('Opis', sql.VarChar(max), req.body.misjaOpis)
-        .input('Status', sql.VarChar(30), req.body.misjaStatus)
-        .input('terminRozpoczecia', sql.DateTime, req.body.misjaTerminRozpoczecia)
-        .input('terminZakonczenia', sql.DateTime, req.body.misjaTerminZakonczenia)
-        .input('WzorzecId', sql.VarChar(50), parseInt(req.body.misjaWzorzecId))
-        .query('INSERT INTO Misja (nazwa, opis, status, terminRozpoczecia, terminZakonczenia) VALUES ' +
-            '(@Nazwa, @Opis, @Status, @terminRozpoczecia, @terminZakonczenia)')
+        .input('Nazwa', sql.VarChar(150), req.body.nazwa)
+        .input('Opis', sql.VarChar(10000), req.body.opis)
+        .input('terminRozpoczecia', sql.DateTime, req.body.terminRozpoczecia)
+        .input('terminZakonczenia', sql.DateTime, req.body.terminZakonczenia)
+        .input('Status', sql.VarChar(200), "planowana")
+        .query('INSERT INTO Misja (nazwa, opis, terminRozpoczecia, terminZakonczenia, status) VALUES ' +
+            '(@Nazwa, @Opis, @terminRozpoczecia, @terminZakonczenia, @Status)')
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
   }
-  res.render('missionCreate', {error: 'Dodano misje.'})
+  res.render('panel', {error: 'Dodano misje.'})
 }
 
 async function showFormCreateUser(req, res) {
