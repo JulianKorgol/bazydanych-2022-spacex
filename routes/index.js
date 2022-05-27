@@ -88,10 +88,26 @@ async function showMissions(req, res) {
     result = await dbRequest
         .query('SELECT * FROM Misja')
     missions = result.recordset
+    missions.forEach(mission => {
+      mission.terminZakonczenia = String(mission.terminZakonczenia)
+      mission.terminRozpoczecia = String(mission.terminRozpoczecia)
+      dataZakonczen = ""
+      dataPoczatek = ""
+      for (let i = 0; i < mission.terminZakonczenia.length; i++) {
+        if (mission.terminZakonczenia[i] === "(") {
+          break;
+        }
+        else {
+          dataZakonczen += mission.terminZakonczenia[i]
+          dataPoczatek += mission.terminRozpoczecia[i]
+        }
+      }
+      mission.terminZakonczenia = dataZakonczen;
+      mission.terminRozpoczecia = dataPoczatek;
+    })
   } catch (err) {
     console.error('Nie udało się pobrać listy misji.', err)
   }
-  console.log(missions)
   res.render('misja', {
     missions: missions,
     message: res.message,
