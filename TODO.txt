@@ -1,0 +1,22 @@
+- Wyświetlanie większej ilości informacji o użytkowniku np. poprzez przycisk więcej informacji [http://localhost:3000/uzytkownicy]
+- Wyświetlanie misji przypisanych bezpośrednio do danego użytkownika. Można to zrobić w szczegółach użytkownika na podstawie powyższego punktu.
+- Szczegóły misji -> uporządkować wyświetlanie + design
+- Dodawanie załogi w szczegółach misji
+
+Funkcjonalności do dodania:
+- Możliwość dodania misji ze wzorca misji
+
+
+
+Normal:
+- Uprawnienia -> Kto może jakie rzeczy wykonywać na naszej stronie
+
+Low:
+- Do hardcorować style
+- Uporządkować nazewnistwo plików z linkami
+
+
+
+
+Przed oddaniem:
+- Testowanie wszystkiego
