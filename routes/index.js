@@ -47,7 +47,7 @@ function logout(req, res) {
   homePage(req, res);
 }
 
-// Wyświetlanie załogi
+// Wyświetlanie listy użytkowników
 async function showCrew(req, res) {
   let crew = []
 
@@ -129,28 +129,6 @@ async function showDetailsOfMission(req, res) {
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
     isAdmin: req.session?.isAdmin
-  })
-}
-
-// Wyświetlanie listy użytkowników
-async function showUsers(req, res) {
-  let missions = []
-
-  try {
-    const dbRequest = await request()
-
-    result = await dbRequest
-        .query('SELECT imie, nazwisko, login FROM Uzytkownik')
-
-    missions = result.recordset
-  } catch (err) {
-    console.error('Nie udało się pobrać listy użytkowników.', err)
-  }
-
-  res.render('index', {
-    title: 'Lista użytkowników',
-    message: res.message,
-    userLogin: req.session?.userLogin
   })
 }
 
