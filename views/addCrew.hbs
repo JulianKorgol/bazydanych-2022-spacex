@@ -1,0 +1,41 @@
+{{#if userLogin}}
+    {{#if error}}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        <div>
+            <a href="/panel">Panel</a>
+            {{#each mission}}
+                <a href="/misjaSzczegoly?id={{this.id}}">Powrót do szczegółów misji</a>
+                <a href="/addCrew?id={{this.id}}">Dodaj następnego</a>
+            {{/each}}
+        </div>
+    {{/if}}
+    {{#each mission}}
+        <h1 class="title">Dodawanie załogentów do misji: {{this.nazwa}}</h1>
+        <p id="idMisji">ID misji: {{this.id}}</p>
+    {{/each}}
+    <div class="formularzDodawaniaZalogenta">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="crew" class="form-label">Załogent*</label>
+                <select name="crew" id="crewSelect">
+                    {{#each zalogenci}}
+                        <option value="{{this.id}}">{{this.imie}} {{this.nazwisko}} ({{this.id}})</option>
+                    {{/each}}
+                </select>
+            </div>
+            {{#each mission}}
+                <input type="hidden" name="mission" value="{{this.id}}" />
+            {{/each}}
+            <div class="buttonCenter">
+                <button class="btn btn-lg btn-primary">Stwórz</button>
+            </div>
+        </form>
+    </div>
+    {{#each mission}}
+    <div class="text-center">
+        <a href="/misjaSzczegoly?id={{this.id}}">Powrót do szczegółów misji</a>
+    </div>
+    {{/each}}
+{{/if}}

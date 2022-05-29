@@ -42,3 +42,13 @@ table {
     align-items: center;
     justify-content: center;
 }
+
+#idMisji {
+    text-align: center;
+}
+
+.formularzDodawaniaZalogenta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

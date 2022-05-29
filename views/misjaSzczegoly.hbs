@@ -45,10 +45,12 @@
                 </tr>
             {{/each}}
         </table>
+        {{#each mission}}
         <div class="buttonCenter" id="addCrew">
-            <a class="btn btn-primary btn-xl text-uppercase" role="button" href="/login" style="margin-right: 3%;">Dodaj
+            <a class="btn btn-primary btn-xl text-uppercase" role="button" href="/addCrew?id={{this.id}}" style="margin-right: 3%;">Dodaj
             załogentów</a>
         </div>
+        {{/each}}
     </div>
     {{/if}}
 </div>

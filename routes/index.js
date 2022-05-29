@@ -158,7 +158,7 @@ async function showExamples(req, res) {
 async function showMisjaCreateForm(req, res) {
   res.render('misjaCreate', {userLogin: req.session?.userLogin})
 }
-// Tworzenie załogi
+// Tworzenie użytkowników
 async function createUser(req, res) {
   let user = []
 
@@ -215,6 +215,57 @@ async function panel(req, res) {
   res.render('panel', {userLogin: req.session?.userLogin})
 }
 
+//Dodawanie załogentów do misji -> get
+async function showFormAddCrewToMission(req, res) {
+  let zalogenci = []
+  let mission = []
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('ID', sql.Int, req.query.id)
+        .query('SELECT * FROM misja WHERE id = @ID')
+    mission = result.recordset
+
+    result = await dbRequest
+        .input('Idi', sql.Int, req.query.id)
+        .query('SELECT Uzytkownik.id AS id, Uzytkownik.imie AS imie, Uzytkownik.nazwisko AS nazwisko FROM Uzytkownik FULL OUTER JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Uzytkownik.id NOT IN (SELECT Z.idUzytkownik FROM Zaloga WHERE idMisja = @Idi)')
+    zalogenci = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów misji.', err)
+  }
+  res.render('addCrew', {
+    zalogenci: zalogenci,
+    mission: mission,
+    message: res.message,
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
+}
+
+//Dodawanie załogentów do misji -> post
+// Nie działa zapytanie + odpowiedź serwera - TODO
+async function addCrewToMission(req, res) {
+  let crew = []
+
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.body.crew)
+        .input('IdMisja', sql.Int, req.body.mission)
+        .query('INSERT INTO Zaloga (idUzytkownik, idMisja) VALUES (@Id, @IdMisja)')
+  } catch (err) {
+    console.error('Nie udało się dodać misji.', err)
+  }
+  res.render('addCrew', {
+    error: 'Dodano załogenta.',
+    message: res.message,
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
+}
+
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
@@ -236,4 +287,7 @@ router.get('/misjaSzczegoly', showDetailsOfMission)
 router.get('/', homePage)
 //Panel
 router.get('/panel', panel)
+//Dodawanie załogentów do misji
+router.get('/addCrew', showFormAddCrewToMission)
+router.post('/addCrew', addCrewToMission)
 module.exports = router;

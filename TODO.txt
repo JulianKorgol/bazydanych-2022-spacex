@@ -1,7 +1,6 @@
 - Wyświetlanie większej ilości informacji o użytkowniku np. poprzez przycisk więcej informacji [http://localhost:3000/uzytkownicy] - TODO
 - Wyświetlanie misji przypisanych bezpośrednio do danego użytkownika. Można to zrobić w szczegółach użytkownika na podstawie powyższego punktu. - TODO
 - Szczegóły misji -> uporządkować wyświetlanie + design - TODO
-- Dodawanie załogi w szczegółach misji - TODO
 
 Funkcjonalności do dodania:
 - Możliwość dodania misji ze wzorca misji - TODO
