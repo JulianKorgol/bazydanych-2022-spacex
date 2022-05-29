@@ -1,0 +1,58 @@
+<div>
+    {{#if userLogin}}
+        {{#each user}}
+            <h1 class="title">Szczegóły użytkownika {{this.imie}} {{this.nazwisko}}</h1>
+            <p class="center">ID użytkownika: {{this.id}}</p>
+        {{/each}}
+        <div class="user">
+            <table>
+                <th>ID</th>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>Miejsce Zamieszkania</th>
+                <th>Specjalizacja</th>
+                <th>Rola w systemie</th>
+                <th>Szef ID</th>
+                {{#each user}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.imie}}</td>
+                        <td>{{this.nazwisko}}</td>
+                        <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
+                        <td>{{this.specjalizacja}}</td>
+                        <td>{{this.rodzajUzytkownika}}</td>
+                        <td>{{this.SzefId}}</td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+        <h2 class="center" id="UserMissions">Misje, w których uczestniczy</h2>
+        <div class="missionTable">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Status</th>
+                    <th>termin Rozpoczęcia</th>
+                    <th>Termin Zakończenia</th>
+                    <th>Więcej szczegółów</th>
+                </tr>
+                {{#each mission}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.nazwa}}</td>
+                        <td>{{this.opis}}</td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.terminRozpoczecia}}</td>
+                        <td>{{this.terminZakonczenia}}</td>
+                        <td><a href="misjaSzczegoly?id={{this.id}}">Szczegóły</td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    {{/if}}
+</div>
+<div class="text-center goBack">
+    <a href="/uzytkownicy">Powrót</a>
+</div>

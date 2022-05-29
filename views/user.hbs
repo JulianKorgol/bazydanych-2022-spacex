@@ -4,12 +4,14 @@
         <th>ID</th>
         <th>Imie</th>
         <th>Nazwisko</th>
+        <th>Szczegóły</th>
     {{#each crew}}
         <div class="user">
             <tr>
                 <td>{{this.id}}</td>
                 <td>{{this.imie}}</td>
                 <td>{{this.nazwisko}}</td>
+                <td><a href="userDetails?id={{this.id}}">Więcej szczegółów</td>
             </tr>
         </div>
     {{/each}}

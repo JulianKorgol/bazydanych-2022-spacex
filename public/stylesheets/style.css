@@ -52,3 +52,17 @@ table {
     align-items: center;
     justify-content: center;
 }
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#UserMissions {
+    margin-top: 2%;
+}
+
+.goBack {
+    margin-top: 5%;
+}

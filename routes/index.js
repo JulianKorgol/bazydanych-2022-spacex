@@ -267,6 +267,31 @@ async function addCrewToMission(req, res) {
   })
 }
 
+async function userDetails(req, res) {
+  let user = []
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.id)
+        .query('SELECT * FROM Uzytkownik WHERE Uzytkownik.id = @Id')
+    user = result.recordset
+
+    result = await dbRequest
+        .input('Idi', sql.Int, req.query.id)
+        .query('SELECT Misja.id AS id, nazwa as nazwa, opis as opis, status as status, terminRozpoczecia as terminRozpoczecia, terminZakonczenia as terminZakonczenia FROM Misja JOIN Zaloga Z on Misja.id = Z.idMisja WHERE idUzytkownik = @Idi')
+    mission = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów użytkownika.', err)
+  }
+  res.render('userDetails', {
+    user: user,
+    mission: mission,
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
+}
+
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
@@ -291,4 +316,6 @@ router.get('/panel', panel)
 //Dodawanie załogentów do misji
 router.get('/addCrew', showFormAddCrewToMission)
 router.post('/addCrew', addCrewToMission)
+//Szczegóły użytkownika
+router.get('/userDetails', userDetails)
 module.exports = router;
