@@ -1,19 +1,19 @@
-- Wyświetlanie większej ilości informacji o użytkowniku np. poprzez przycisk więcej informacji [http://localhost:3000/uzytkownicy]
-- Wyświetlanie misji przypisanych bezpośrednio do danego użytkownika. Można to zrobić w szczegółach użytkownika na podstawie powyższego punktu.
-- Szczegóły misji -> uporządkować wyświetlanie + design
-- Dodawanie załogi w szczegółach misji
+- Wyświetlanie większej ilości informacji o użytkowniku np. poprzez przycisk więcej informacji [http://localhost:3000/uzytkownicy] - TODO
+- Wyświetlanie misji przypisanych bezpośrednio do danego użytkownika. Można to zrobić w szczegółach użytkownika na podstawie powyższego punktu. - TODO
+- Szczegóły misji -> uporządkować wyświetlanie + design - TODO
+- Dodawanie załogi w szczegółach misji - TODO
 
 Funkcjonalności do dodania:
-- Możliwość dodania misji ze wzorca misji
+- Możliwość dodania misji ze wzorca misji - TODO
 
 
 
 Normal:
-- Uprawnienia -> Kto może jakie rzeczy wykonywać na naszej stronie
+- Uprawnienia -> Kto może jakie rzeczy wykonywać na naszej stronie - TODO
 
 Low:
-- Do hardcorować style
-- Uporządkować nazewnistwo plików z linkami
+- Do hardcorować style - TODO
+- Uporządkować nazewnistwo plików z linkami - TODO
 
 
 

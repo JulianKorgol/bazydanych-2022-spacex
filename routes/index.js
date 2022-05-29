@@ -47,17 +47,6 @@ function logout(req, res) {
   homePage(req, res);
 }
 
-// SPACEX - funkcjonalności
-// Wyświetlanie załogi
-// Wyświetlanie listy misji
-// Tworzenie użytkowników
-// Tworzenie załogi
-// Tworzenie misji
-// Logowanie
-// Uprawnienia - TODO - Funkcja isAdmin oraz isSuperAdmin stworzone, jednak problem z porównaniem w HBS
-// Korzystanie z wzorców misji - TODO
-
-
 // Wyświetlanie załogi
 async function showCrew(req, res) {
   let crew = []
