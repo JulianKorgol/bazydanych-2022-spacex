@@ -68,6 +68,19 @@ async function showCrew(req, res) {
     userLogin: req.session?.userLogin
   })
 }
+function dataFix(data) {
+  let dataResult = ""
+  data = String(data)
+  for (let i = 0; i < data.length; i++) {
+    if (data[i] === "(") {
+      break;
+    }
+    else {
+      dataResult += data[i]
+    }
+  }
+  return dataResult
+}
 // Wyświetlanie listy misji
 async function showMissions(req, res) {
   let missions = []
@@ -78,21 +91,8 @@ async function showMissions(req, res) {
         .query('SELECT * FROM Misja')
     missions = result.recordset
     missions.forEach(mission => {
-      mission.terminZakonczenia = String(mission.terminZakonczenia)
-      mission.terminRozpoczecia = String(mission.terminRozpoczecia)
-      dataZakonczen = ""
-      dataPoczatek = ""
-      for (let i = 0; i < mission.terminZakonczenia.length; i++) {
-        if (mission.terminZakonczenia[i] === "(") {
-          break;
-        }
-        else {
-          dataZakonczen += mission.terminZakonczenia[i]
-          dataPoczatek += mission.terminRozpoczecia[i]
-        }
-      }
-      mission.terminZakonczenia = dataZakonczen;
-      mission.terminRozpoczecia = dataPoczatek;
+      mission.terminRozpoczecia = dataFix(mission.terminRozpoczecia)
+      mission.terminZakonczenia = dataFix(mission.terminZakonczenia)
     })
   } catch (err) {
     console.error('Nie udało się pobrać listy misji.', err)
@@ -121,7 +121,8 @@ async function showDetailsOfMission(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
-  console.log(zalogent)
+  mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
+  mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
   res.render('misjaSzczegoly', {
     zalogent: zalogent,
     mission: mission,
