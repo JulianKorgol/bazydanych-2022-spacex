@@ -27,7 +27,7 @@ async function login(req, res) {
       } else if (['MatGon'].includes(req.session.userLogin)) {
         req.session.isAdmin = true;
       }
-      checkPrivilegeFirst(req, res)
+       // checkPrivilegeFirst(req, res)
       panel(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
