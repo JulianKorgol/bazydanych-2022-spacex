@@ -21,8 +21,11 @@
                         <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
                         <td>{{this.specjalizacja}}</td>
                         <td>{{this.rodzajUzytkownika}}</td>
-                        <td>{{this.SzefId}}</td>
-                    </tr>
+                        {{#if this.szefId}}
+                            <td>{{this.szefId}}</td>
+                        {{else}}
+                            <td>Brak</td>
+                        {{/if}}
                 {{/each}}
             </table>
         </div>
@@ -56,3 +59,25 @@
 <div class="text-center goBack">
     <a href="/uzytkownicy">Powrót</a>
 </div>
+<style>
+        body {
+            font-size: 15px;
+        }
+        h2 {
+            font-size: 21px;
+            font-weight: 600;
+        }
+        h4 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        div {
+            background-color: #fefefe;
+        }
+        td {
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid #111;
+        }
+
+</style>

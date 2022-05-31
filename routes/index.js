@@ -283,6 +283,10 @@ async function userDetails(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów użytkownika.', err)
   }
+  mission.forEach(mission => {
+    mission.terminRozpoczecia = dataFix(mission.terminRozpoczecia)
+    mission.terminZakonczenia = dataFix(mission.terminZakonczenia)
+  })
   res.render('userDetails', {
     user: user,
     mission: mission,
