@@ -1,9 +1,4 @@
 Funkcjonalności do dodania:
-- Możliwość dodania misji ze wzorca misji - TODO
-
-
-
-Normal:
 - Uprawnienia -> Kto może jakie rzeczy wykonywać na naszej stronie - TODO
 
 Low:
