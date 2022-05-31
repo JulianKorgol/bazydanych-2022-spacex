@@ -149,13 +149,13 @@ async function showExamples(req, res) {
     result = await dbRequest
         .query('SELECT * FROM WzorceMisji')
 
-    missions = result.recordset
+    examples = result.recordset
   } catch (err) {
-    console.error('Nie udało się pobrać listy użytkowników.', err)
+    console.error('Nie udało się pobrać listy wzorców.', err)
   }
 
   res.render('wzorce', {
-    missions: missions,
+    wzorce: examples,
     message: res.message,
     userLogin: req.session?.userLogin
   })
@@ -313,6 +313,52 @@ async function userDetails(req, res) {
   })
 }
 
+async function StworzMisjeZWzorcemFormularz(req, res) {
+  let wzorzec = []
+  try {
+    const dbRequest = await request()
+
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.listaWzorcow)
+        .query('SELECT * FROM WzorceMisji WHERE id = @Id')
+    wzorzec = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać wzorca misji.', err)
+  }
+  res.render('StworzMisjeZWzorcem', {
+    wzorzec: wzorzec,
+    message: res.message,
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
+}
+
+async function StworzMisjeZWzorcem(req, res) {
+  let wzorzec = []
+
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Nazwa', sql.VarChar(150), req.body.nazwa)
+        .input('Opis', sql.VarChar(10000), req.body.opis)
+        .input('terminRozpoczecia', sql.DateTime, req.body.terminRozpoczecia)
+        .input('terminZakonczenia', sql.DateTime, req.body.terminZakonczenia)
+        .input('Status', sql.VarChar(200), "planowana")
+        .input('IdWzorca', sql.Int, req.query.listaWzorcow)
+        .query('INSERT INTO Misja (nazwa, opis, terminRozpoczecia, terminZakonczenia, status, wzorzecId) VALUES (@Nazwa, @Opis, @terminRozpoczecia, @terminZakonczenia, @Status, @IdWzorca)')
+  } catch (err) {
+    console.error('Nie udało się dodać misji.', err)
+  }
+  res.render('StworzMisjeZWzorcem', {
+    error: 'Dodano załogenta.',
+    message: res.message,
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
+}
+
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
@@ -339,6 +385,9 @@ router.get('/addCrew', showFormAddCrewToMission)
 router.post('/addCrew', addCrewToMission)
 //Szczegóły użytkownika
 router.get('/userDetails', userDetails)
-//Wzorce misji
+//Lista wzorców misji
 router.get('/wzorce', showExamples)
+//Stwórz misje na podstawie wzorca
+router.get('/StworzMisjeZWzorcem', StworzMisjeZWzorcemFormularz)
+router.post('/StworzMisjeZWzorcem', StworzMisjeZWzorcem)
 module.exports = router;
