@@ -37,8 +37,8 @@ async function login(req, res) {
   }
 
 }
-
-async function checkPrivilegeFirst(req, res) {
+/*
+async function checkPrivilegeFirst(req) {
   try {
     const dbRequest = await request()
 
@@ -51,7 +51,8 @@ async function checkPrivilegeFirst(req, res) {
     console.error('Nie udało się pobrać listy misji.', err)
   }
   console.log(toReturn)
-}
+  return toReturn
+}*/
 async function homePage(req, res) {
   res.render('index')
 }
@@ -76,13 +77,16 @@ async function showCrew(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać listy załogi', err)
   }
-
+ /* if (checkPrivilegeFirst() === 'admin' || checkPrivilegeFirst() === 'headadmin') {
+    privileges = true
+  }
+  else {
+    privileges = false
+  } */
   res.render('user', {
     crew: crew,
     message: res.message,
     userLogin: req.session?.userLogin,
-    isAdmin: req.session?.isAdmin,
-    isSuperAdmin: req.session?.isSuperAdmin
   })
 }
 
