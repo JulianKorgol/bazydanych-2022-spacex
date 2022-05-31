@@ -68,6 +68,7 @@ async function showCrew(req, res) {
     userLogin: req.session?.userLogin
   })
 }
+
 function dataFix(data) {
   let dataResult = ""
   data = String(data)
@@ -81,6 +82,7 @@ function dataFix(data) {
   }
   return dataResult
 }
+
 // Wyświetlanie listy misji
 async function showMissions(req, res) {
   let missions = []
