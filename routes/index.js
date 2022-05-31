@@ -27,7 +27,6 @@ async function login(req, res) {
       } else if (['MatGon'].includes(req.session.userLogin)) {
         req.session.isAdmin = true;
       }
-       // checkPrivilegeFirst(req, res)
       panel(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
@@ -37,22 +36,7 @@ async function login(req, res) {
   }
 
 }
-/*
-async function checkPrivilegeFirst(req) {
-  try {
-    const dbRequest = await request()
 
-    result = await dbRequest
-        .input('Login', sql.VarChar(50), req.session.userLogin)
-        .query('SELECT rodzajUzytkownika FROM Uzytkownik WHERE login = @Login')
-    toReturn = result.recordset[0].rodzajUzytkownika
-  }
-   catch (err) {
-    console.error('Nie udało się pobrać listy misji.', err)
-  }
-  console.log(toReturn)
-  return toReturn
-}*/
 async function homePage(req, res) {
   res.render('index')
 }
@@ -77,16 +61,16 @@ async function showCrew(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać listy załogi', err)
   }
- /* if (checkPrivilegeFirst() === 'admin' || checkPrivilegeFirst() === 'headadmin') {
-    privileges = true
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
   }
   else {
-    privileges = false
-  } */
+    privileged = false
+  }
   res.render('user', {
     crew: crew,
     message: res.message,
-    userLogin: req.session?.userLogin,
+    privileged: privileged,
   })
 }
 
@@ -120,12 +104,16 @@ async function showMissions(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać listy misji.', err)
   }
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }  
+  else {
+    privileged = false
+  }
   res.render('misja', {
     missions: missions,
     message: res.message,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    privileged: privileged
   })
 }
 
@@ -148,13 +136,17 @@ async function showDetailsOfMission(req, res) {
   }
   mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
   mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
+  if(req.session.isSuperAdmin || req.session.isAdmin)  {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
   res.render('misjaSzczegoly', {
     zalogent: zalogent,
     mission: mission,
     message: res.message,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    privileged: privileged
   })
 }
 
@@ -181,10 +173,14 @@ async function showExamples(req, res) {
 }
 
 async function showMisjaCreateForm(req, res) {
+  if (req.session.isSuperAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
   res.render('misjaCreate', {
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    privileged: privileged,
   })
 }
 // Tworzenie użytkowników
@@ -215,6 +211,7 @@ async function createUser(req, res) {
   }
   res.render('userCreate', {
     error: 'Dodano użytkownika.',
+
   })
 }
 
@@ -243,8 +240,13 @@ async function createMission(req, res) {
 }
 
 async function showFormCreateUser(req, res) {
-  res.render('userCreate', {userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
+  if (req.session.isSuperAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+  res.render('userCreate', {privileged: privileged
   })
 }
 
@@ -270,13 +272,17 @@ async function showFormAddCrewToMission(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
+  if (req.session.isAdmin || req.session.isSuperAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
   res.render('addCrew', {
     zalogenci: zalogenci,
     mission: mission,
     message: res.message,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    privileged: privileged
   })
 }
 
@@ -323,12 +329,16 @@ async function userDetails(req, res) {
     mission.terminRozpoczecia = dataFix(mission.terminRozpoczecia)
     mission.terminZakonczenia = dataFix(mission.terminZakonczenia)
   })
+  if (req.sessionS.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
   res.render('userDetails', {
     user: user,
     mission: mission,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    privileged: privileged
   })
 }
 

@@ -7,8 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="title">Lista Misji</h1>
-{{#if userLogin}}
+{{#if privileged}}
+ <h1 class="title">Lista Misji</h1>
         <table>
             <th>ID</th>
             <th>Nazwa</th>
@@ -31,11 +31,11 @@
                 </div>
             {{/each}}
         </table>
-    {{else}}
-        <div class="alert alert-danger mt-3" role="alert">
-            Nie masz uprawnień do tej strony
-        </div>
-    {{/if}}
+{{else}}
+    <div class="alert alert-danger mt-3" role="alert">
+        Nie masz uprawnień do tej strony
+    </div>
+{{/if}}
     <style>
         body {
             font-size: 15px;

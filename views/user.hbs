@@ -1,4 +1,4 @@
-{{#if userLogin}}
+{{#if privileged}}
     <h1 class="title">Użytkownicy</h1>
     <table>
         <th>ID</th>
@@ -16,11 +16,10 @@
         </div>
     {{/each}}
     </table>
-{{#else}}
+{{else}}
     <div class="alert alert-danger mt-3" role="alert">
     Nie masz uprawnień do tej strony
-    </div>
-{{/else}}
+    </div> 
 {{/if}}
 
 <div class="text-center" style="margin-top: 3%">
