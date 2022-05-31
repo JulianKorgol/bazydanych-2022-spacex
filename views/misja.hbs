@@ -8,29 +8,34 @@
 </head>
 <body>
     <h1 class="title">Lista Misji</h1>
-    {{#if userLogin}}
-    <table>
-        <th>ID</th>
-        <th>Nazwa</th>
-        <th>Opis</th>
-        <th>Status</th>
-        <th>Termin Rozpoczęcia</th>
-        <th>Termin Zakończenia</th>
-        <th></th>
-        {{#each missions}}
-            <div class="Misje">
-                <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.nazwa}}</td>
-                    <td>{{this.opis}}</td>
-                    <td>{{this.status}}</td>
-                    <td>{{this.terminRozpoczecia}}</td>
-                    <td>{{this.terminZakonczenia}}</td>
-                    <td><a href="misjaSzczegoly?id={{this.id}}">Szczegóły</td>
-                </tr>
-            </div>
-        {{/each}}
-    </table>
+    {{#if isSuperAdmin or isAdmin}}
+        <table>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Status</th>
+            <th>Termin Rozpoczęcia</th>
+            <th>Termin Zakończenia</th>
+            <th></th>
+            {{#each missions}}
+                <div class="Misje">
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.nazwa}}</td>
+                        <td>{{this.opis}}</td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.terminRozpoczecia}}</td>
+                        <td>{{this.terminZakonczenia}}</td>
+                        <td><a href="misjaSzczegoly?id={{this.id}}">Szczegóły</td>
+                    </tr>
+                </div>
+            {{/each}}
+        </table>
+    {{else}}
+        <div class="alert alert-danger mt-3" role="alert">
+            Nie masz uprawnień do tej strony
+        </div>
+    {{/else}}
     {{/if}}
     <style>
         body {

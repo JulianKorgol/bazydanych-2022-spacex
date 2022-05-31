@@ -65,7 +65,9 @@ async function showCrew(req, res) {
   res.render('user', {
     crew: crew,
     message: res.message,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    isAdmin: req.session?.isAdmin,
+    isSuperAdmin: req.session?.isSuperAdmin
   })
 }
 function dataFix(data) {
@@ -100,7 +102,9 @@ async function showMissions(req, res) {
   res.render('misja', {
     missions: missions,
     message: res.message,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
   })
 }
 
@@ -157,7 +161,11 @@ async function showExamples(req, res) {
 }
 
 async function showMisjaCreateForm(req, res) {
-  res.render('misjaCreate', {userLogin: req.session?.userLogin})
+  res.render('misjaCreate', {
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
 }
 // Tworzenie użytkowników
 async function createUser(req, res) {
@@ -185,7 +193,9 @@ async function createUser(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
   }
-  res.render('userCreate', {error: 'Dodano użytkownika.'})
+  res.render('userCreate', {
+    error: 'Dodano użytkownika.',
+  })
 }
 
 // Tworzenie misji
@@ -205,11 +215,17 @@ async function createMission(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
   }
-  res.render('panel', {error: 'Dodano misje.'})
+  res.render('panel', {
+    error: 'Dodano misje.',
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin
+  })
 }
 
 async function showFormCreateUser(req, res) {
-  res.render('userCreate', {userLogin: req.session?.userLogin})
+  res.render('userCreate', {userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+  })
 }
 
 async function panel(req, res) {

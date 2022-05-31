@@ -1,4 +1,4 @@
-{{#if userLogin}}
+{{#if isSuperAdmin or isAdmin}}
     <h1 class="title">Użytkownicy</h1>
     <table>
         <th>ID</th>
@@ -16,9 +16,11 @@
         </div>
     {{/each}}
     </table>
-    {{#if isSuperAdmin}}
-        <h1>Hello World</h1>
-    {{/if}}
+{{#else}}
+    <div class="alert alert-danger mt-3" role="alert">
+    Nie masz uprawnień do tej strony
+    </div>
+{{/else}}
 {{/if}}
 
 <div class="text-center" style="margin-top: 3%">
