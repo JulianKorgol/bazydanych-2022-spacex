@@ -229,7 +229,7 @@ async function showFormAddCrewToMission(req, res) {
 
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
-        .query('SELECT Uzytkownik.id AS id, Uzytkownik.imie AS imie, Uzytkownik.nazwisko AS nazwisko FROM Uzytkownik FULL OUTER JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Uzytkownik.id NOT IN (SELECT Z.idUzytkownik FROM Zaloga WHERE idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
+        .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
     zalogenci = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
