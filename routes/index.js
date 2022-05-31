@@ -143,15 +143,14 @@ async function showExamples(req, res) {
     const dbRequest = await request()
 
     result = await dbRequest
-        .query('SELECT * FROM ')
+        .query('SELECT * FROM WzorceMisji')
 
     missions = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać listy użytkowników.', err)
   }
 
-  res.render('index', {
-    title: 'Lista Wzorców Misji',
+  res.render('wzorce', {
     missions: missions,
     message: res.message,
     userLogin: req.session?.userLogin
@@ -324,4 +323,6 @@ router.get('/addCrew', showFormAddCrewToMission)
 router.post('/addCrew', addCrewToMission)
 //Szczegóły użytkownika
 router.get('/userDetails', userDetails)
+//Wzorce misji
+router.get('/wzorce', showExamples)
 module.exports = router;
