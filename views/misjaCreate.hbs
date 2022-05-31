@@ -1,4 +1,4 @@
-{{#if isAdmin or isSuperAdmin}}
+{{#if userLogin}}
     <form action="" method="POST" class="formularzTworzeniaMisji">
         <div class="mb-3">
             <label for="nazwa" class="form-label">Nazwa*</label>
@@ -50,7 +50,6 @@
     <div class="alert alert-danger mt-3" role="alert">
         Nie masz uprawnień do tej strony
     </div>
-{{/else}}
 {{/if}}
 <div class="text-center">
     <a href="/panel">Powrót</a>

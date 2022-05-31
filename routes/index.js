@@ -27,6 +27,7 @@ async function login(req, res) {
       } else if (['MatGon'].includes(req.session.userLogin)) {
         req.session.isAdmin = true;
       }
+      checkPrivilegeFirst(req, res)
       panel(req, res);
     } else {
       res.render('login', {title: 'Logownie', error: 'Logowanie nieudane'});
@@ -37,6 +38,20 @@ async function login(req, res) {
 
 }
 
+async function checkPrivilegeFirst(req, res) {
+  try {
+    const dbRequest = await request()
+
+    result = await dbRequest
+        .input('Login', sql.VarChar(50), req.session.userLogin)
+        .query('SELECT rodzajUzytkownika FROM Uzytkownik WHERE login = @Login')
+    toReturn = result.recordset[0].rodzajUzytkownika
+  }
+   catch (err) {
+    console.error('Nie udało się pobrać listy misji.', err)
+  }
+  console.log(toReturn)
+}
 async function homePage(req, res) {
   res.render('index')
 }

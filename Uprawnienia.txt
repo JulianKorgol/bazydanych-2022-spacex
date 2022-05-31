@@ -1,10 +1,10 @@
 Uprawnienia:
-	Wyświetlanie użytkowników => admin (+)
 	Tworzenie użytkowników => headAdmin (+)
+	Wyświetlanie użytkowników => admin (+)
 	Tworzenie misji => admin (+)
+	Dodawanie użytkowników do misji => admin (+)
 	Wyświetlanie misji => admin + załoga
 	Wyświetlanie szczegółów misji => admin + załoga
-	Dodawanie użytkowników do misji => admin
 	Szczegóły użytkowników => admin  + dany użytkownik
 PS jak pisze admin, to też chodzi o headAdminów
 PS (2) jak czegoś zapomniałem to dodaj to

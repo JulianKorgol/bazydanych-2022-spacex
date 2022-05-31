@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 class="title">Lista Misji</h1>
-    {{#if isSuperAdmin or isAdmin}}
+{{#if isSuperAdmin or isAdmin}}
         <table>
             <th>ID</th>
             <th>Nazwa</th>
@@ -35,7 +35,6 @@
         <div class="alert alert-danger mt-3" role="alert">
             Nie masz uprawnień do tej strony
         </div>
-    {{/else}}
     {{/if}}
     <style>
         body {
