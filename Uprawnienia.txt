@@ -1,8 +1,8 @@
 Uprawnienia:
-	Tworzenie użytkowników => headAdmin (+)
-	Wyświetlanie użytkowników => admin (+)
-	Tworzenie misji => admin (+)
-	Dodawanie użytkowników do misji => admin (+)
+	Tworzenie użytkowników => headAdmin 
+	Wyświetlanie użytkowników => admin 
+	Tworzenie misji => admin 
+	Dodawanie użytkowników do misji => admin 
 	Wyświetlanie misji => admin + załoga
 	Wyświetlanie szczegółów misji => admin + załoga
 	Szczegóły użytkowników => admin  + dany użytkownik
