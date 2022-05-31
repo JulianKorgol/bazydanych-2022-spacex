@@ -1,0 +1,53 @@
+<form action="" method="POST" class="formularzTworzeniaMisji">
+    {{#each wzorzec}}
+    <div class="mb-3">
+        <label for="nazwa" class="form-label">Nazwa*</label>
+        <input
+                type="text"
+                class="form-control"
+                name="nazwa"
+                id="nazwa"
+                value="{{this.nazwa}}"
+                required
+        />
+    </div>
+    <div class="mb-3">
+        <label for="opis" class="form-label">Opis*</label>
+        <textarea
+                type="textarea"
+                class="form-control"
+                name="opis"
+                id="opis"
+                required>{{this.opis}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="terminRozpoczecia" class="form-label">Termin Rozpoczęcia*</label>
+        <input
+                type="date"
+                class="form-control"
+                name="terminRozpoczecia"
+                id="terminRozpoczecia"
+                required
+        />
+    </div>
+    <div class="mb-3">
+        <label for="terminZakonczenia" class="form-label">Termin Zakończenia (planowany)*</label>
+        <input
+                type="date"
+                class="form-control"
+                name="terminZakonczenia"
+                id="terminZakonczenia"
+                required
+        />
+    </div>
+    <div class="mb-3">
+        <b><p>Sugerowana liczba członków załogi: {{this.liczbaCzlonkowZalogi}}</p></b>
+    </div>
+        {{/each}}
+    <div class="text-center mb-3">
+        <button class="btn btn-lg btn-primary">Stwórz</button>
+    </div>
+</form>
+<div class="text-center">
+    <a href="/panel">Powrót</a>
+</div>
