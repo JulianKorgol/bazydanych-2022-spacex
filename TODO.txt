@@ -1,5 +1,3 @@
-- Szczegóły misji -> uporządkować wyświetlanie + design - TODO
-
 Funkcjonalności do dodania:
 - Możliwość dodania misji ze wzorca misji - TODO
 

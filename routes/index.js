@@ -70,6 +70,7 @@ async function showCrew(req, res) {
     isSuperAdmin: req.session?.isSuperAdmin
   })
 }
+
 function dataFix(data) {
   let dataResult = ""
   data = String(data)
@@ -83,6 +84,7 @@ function dataFix(data) {
   }
   return dataResult
 }
+
 // Wyświetlanie listy misji
 async function showMissions(req, res) {
   let missions = []
@@ -145,15 +147,14 @@ async function showExamples(req, res) {
     const dbRequest = await request()
 
     result = await dbRequest
-        .query('SELECT * FROM ')
+        .query('SELECT * FROM WzorceMisji')
 
     missions = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać listy użytkowników.', err)
   }
 
-  res.render('index', {
-    title: 'Lista Wzorców Misji',
+  res.render('wzorce', {
     missions: missions,
     message: res.message,
     userLogin: req.session?.userLogin
@@ -245,7 +246,7 @@ async function showFormAddCrewToMission(req, res) {
 
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
-        .query('SELECT Uzytkownik.id AS id, Uzytkownik.imie AS imie, Uzytkownik.nazwisko AS nazwisko FROM Uzytkownik FULL OUTER JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Uzytkownik.id NOT IN (SELECT Z.idUzytkownik FROM Zaloga WHERE idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
+        .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
     zalogenci = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
@@ -338,4 +339,6 @@ router.get('/addCrew', showFormAddCrewToMission)
 router.post('/addCrew', addCrewToMission)
 //Szczegóły użytkownika
 router.get('/userDetails', userDetails)
+//Wzorce misji
+router.get('/wzorce', showExamples)
 module.exports = router;
