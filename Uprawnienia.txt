@@ -1,11 +1,18 @@
+Dokument jest charakteryzowany poziomem dostępu, to znaczy, że headadmin posiada dostęp do funkcjonalności admina,
+bo posiada wyższe uprawnienia niż admin.
+
+Hierarchia - najwyższy = najwięcej uprawnień:
+- headadmin
+- admin
+- użytkownik
+
+
+
 Uprawnienia:
 	Tworzenie użytkowników => headAdmin 
-	Wyświetlanie użytkowników => admin 
+	Wyświetlanie użytkowników => admin
 	Tworzenie misji => admin 
 	Dodawanie użytkowników do misji => admin 
-	Wyświetlanie misji => admin + załoga
-	Wyświetlanie szczegółów misji => admin + załoga
-	Szczegóły użytkowników => admin  + dany użytkownik
-PS jak pisze admin, to też chodzi o headAdminów
-PS (2) jak czegoś zapomniałem to dodaj to
-PS (3) masz prawo do zmiany uprawnień tutaj jakby co
+	Wyświetlanie misji => użytkownik
+	Wyświetlanie szczegółów misji => użytkownik
+	Szczegóły użytkowników => admin ( + dany użytkownik - jeśli starczy czasu)
