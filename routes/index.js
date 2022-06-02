@@ -38,7 +38,9 @@ async function login(req, res) {
 }
 
 async function homePage(req, res) {
-  res.render('index')
+  res.render('index', {
+    userLogin: req.session.userLogin
+  })
 }
 
 function logout(req, res) {
@@ -71,6 +73,7 @@ async function showCrew(req, res) {
     crew: crew,
     message: res.message,
     privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -113,7 +116,8 @@ async function showMissions(req, res) {
   res.render('misja', {
     missions: missions,
     message: res.message,
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -146,7 +150,8 @@ async function showDetailsOfMission(req, res) {
     zalogent: zalogent,
     mission: mission,
     message: res.message,
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -189,6 +194,7 @@ async function showMisjaCreateForm(req, res) {
   }
   res.render('misjaCreate', {
     privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 // Tworzenie użytkowników
@@ -227,7 +233,8 @@ async function createUser(req, res) {
 
   res.render('userCreate', {
     error: 'Dodano użytkownika.',
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -260,7 +267,8 @@ async function createMission(req, res) {
     error: 'Dodano misje.',
     isSuperAdmin: req.session?.isSuperAdmin,
     isAdmin: req.session?.isAdmin,
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -271,7 +279,9 @@ async function showFormCreateUser(req, res) {
   else {
     privileged = false
   }
-  res.render('userCreate', {privileged: privileged
+  res.render('userCreate', {
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -282,7 +292,10 @@ async function panel(req, res) {
   else {
     privileged = false
   }
-  res.render('panel', {userLogin: req.session?.userLogin, privileged: privileged})
+  res.render('panel', {
+    userLogin: req.session?.userLogin, 
+    privileged: privileged
+  })
 }
 
 //Dodawanie załogentów do misji -> get
@@ -313,7 +326,8 @@ async function showFormAddCrewToMission(req, res) {
     zalogenci: zalogenci,
     mission: mission,
     message: res.message,
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -378,7 +392,8 @@ async function userDetails(req, res) {
   res.render('userDetails', {
     user: user,
     mission: mission,
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
