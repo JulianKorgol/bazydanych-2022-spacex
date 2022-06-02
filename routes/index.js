@@ -39,7 +39,7 @@ async function login(req, res) {
 
 async function homePage(req, res) {
   res.render('index', {
-    userLogin: req.session.userLogin
+    userLogin: req.session?.userLogin
   })
 }
 
