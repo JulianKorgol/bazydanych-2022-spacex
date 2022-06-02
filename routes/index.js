@@ -329,7 +329,7 @@ async function userDetails(req, res) {
     mission.terminRozpoczecia = dataFix(mission.terminRozpoczecia)
     mission.terminZakonczenia = dataFix(mission.terminZakonczenia)
   })
-  if (req.sessionS.isSuperAdmin || req.session.isAdmin) {
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
     privileged = true
   }
   else {
