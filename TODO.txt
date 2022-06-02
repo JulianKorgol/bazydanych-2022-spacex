@@ -5,7 +5,14 @@ Low:
 - Do hardcorować style - TODO
 - Uporządkować nazewnistwo plików z linkami - TODO
 
-
+High:
+- Usuwanie załogentów - TODO
+- Wyświetlanie misji po stworzeniu - TODO
+- Inforamcja zwrotna do użytkownika - TODO
+- Poprawa wyświetlania komunikatu uprawnień - TODO
+- Edycja misji:
+	- Brak możliwości dodania załogentów w trakciw wykonywania misji - TODO
+	- Brak możliwości zmiany statusu z w trakcie na planowana
 
 
 Przed oddaniem:
