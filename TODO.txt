@@ -1,6 +1,3 @@
-Funkcjonalności do dodania:
-- Uprawnienia -> Kto może jakie rzeczy wykonywać na naszej stronie - TODO
-
 Low:
 - Do hardcorować style - TODO
 - Uporządkować nazewnistwo plików z linkami - TODO
