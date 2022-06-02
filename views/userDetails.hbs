@@ -21,11 +21,12 @@
                         <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
                         <td>{{this.specjalizacja}}</td>
                         <td>{{this.rodzajUzytkownika}}</td>
-                        {{#if this.szefId}}
-                            <td>{{this.szefId}}</td>
+                        {{#if this.SzefId}}
+                            <td>{{this.SzefId}}</td>
                         {{else}}
                             <td>Brak</td>
                         {{/if}}
+                    </tr>
                 {{/each}}
             </table>
         </div>
