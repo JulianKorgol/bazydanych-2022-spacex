@@ -165,10 +165,18 @@ async function showExamples(req, res) {
     console.error('Nie udało się pobrać listy wzorców.', err)
   }
 
+  if(req.session.isSuperAdmin || req.session.isAdmin)  {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+
   res.render('wzorce', {
     wzorce: examples,
     message: res.message,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    privileged: privileged
   })
 }
 
@@ -209,9 +217,17 @@ async function createUser(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
   }
+
+  if(req.session.isSuperAdmin || req.session.isAdmin)  {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+
   res.render('userCreate', {
     error: 'Dodano użytkownika.',
-
+    privileged: privileged
   })
 }
 
@@ -232,10 +248,19 @@ async function createMission(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
   }
+
+  if(req.session.isSuperAdmin || req.session.isAdmin)  {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+
   res.render('panel', {
     error: 'Dodano misje.',
     isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    isAdmin: req.session?.isAdmin,
+    privileged: privileged
   })
 }
 
@@ -251,7 +276,13 @@ async function showFormCreateUser(req, res) {
 }
 
 async function panel(req, res) {
-  res.render('panel', {userLogin: req.session?.userLogin})
+  if(req.session.isSuperAdmin || req.session.isAdmin)  {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+  res.render('panel', {userLogin: req.session?.userLogin, privileged: privileged})
 }
 
 //Dodawanie załogentów do misji -> get
@@ -300,12 +331,21 @@ async function addCrewToMission(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
   }
+
+  if (req.session.isAdmin || req.session.isSuperAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+
   res.render('addCrew', {
     error: 'Dodano załogenta.',
     message: res.message,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    isAdmin: req.session?.isAdmin,
+    privileged: privileged
   })
 }
 
@@ -354,12 +394,21 @@ async function StworzMisjeZWzorcemFormularz(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać wzorca misji.', err)
   }
+
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+
   res.render('StworzMisjeZWzorcem', {
     wzorzec: wzorzec,
     message: res.message,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    isAdmin: req.session?.isAdmin,
+    privileged: privileged
   })
 }
 
@@ -379,12 +428,21 @@ async function StworzMisjeZWzorcem(req, res) {
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
   }
+
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+
   res.render('StworzMisjeZWzorcem', {
     error: 'Dodano załogenta.',
     message: res.message,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin
+    isAdmin: req.session?.isAdmin,
+    privileged: privileged
   })
 }
 
