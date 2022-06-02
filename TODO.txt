@@ -11,7 +11,7 @@ High:
 - Inforamcja zwrotna do użytkownika - TODO
 - Poprawa wyświetlania komunikatu uprawnień - TODO
 - Edycja misji:
-	- Brak możliwości dodania załogentów w trakciw wykonywania misji - TODO
+	- Brak możliwości dodania załogentów w trakcie wykonywania misji - TODO
 	- Brak możliwości zmiany statusu z w trakcie na planowana
 
 
