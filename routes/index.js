@@ -39,11 +39,8 @@ async function login(req, res) {
 
 async function homePage(req, res) {
   res.render('index', {
-<<<<<<< HEAD
-    user: req.session?.userLogin
-=======
+    user: req.session?.userLogin,
     userLogin: req.session?.userLogin
->>>>>>> 5a9edbc51807bb0834515facfc31fb198a139da8
   })
 }
 
@@ -271,13 +268,8 @@ async function createMission(req, res) {
     error: 'Dodano misje.',
     isSuperAdmin: req.session?.isSuperAdmin,
     isAdmin: req.session?.isAdmin,
-<<<<<<< HEAD
     userLogin: req.session?.userLogin,
-    privileged: privileged
-=======
     privileged: privileged,
-    userLogin: req.session?.userLogin
->>>>>>> 5a9edbc51807bb0834515facfc31fb198a139da8
   })
 }
 
