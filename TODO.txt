@@ -1,8 +1,5 @@
 High:
 - Usuwanie załogentów - TODO
-- Wyświetlanie misji po stworzeniu - TODO
-- Inforamcja zwrotna do użytkownika - TODO
-- Poprawa wyświetlania komunikatu uprawnień - TODO
 - Edycja misji:
 	- Brak możliwości dodania załogentów w trakcie wykonywania misji - TODO
 	- Brak możliwości zmiany statusu z w trakcie na planowana

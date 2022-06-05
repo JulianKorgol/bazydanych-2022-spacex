@@ -232,11 +232,7 @@ async function createUser(req, res) {
     privileged = false
   }
 
-  res.render('userCreate', {
-    error: 'Dodano użytkownika.',
-    privileged: privileged,
-    userLogin: req.session?.userLogin
-  })
+  res.redirect('uzytkownicy');
 }
 
 // Tworzenie misji
@@ -264,13 +260,7 @@ async function createMission(req, res) {
     privileged = false
   }
 
-  res.render('panel', {
-    error: 'Dodano misje.',
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
-    userLogin: req.session?.userLogin,
-    privileged: privileged,
-  })
+  res.redirect('misje')
 }
 
 async function showFormCreateUser(req, res) {
@@ -354,14 +344,7 @@ async function addCrewToMission(req, res) {
     privileged = false
   }
 
-  res.render('addCrew', {
-    error: 'Dodano załogenta.',
-    message: res.message,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
-    privileged: privileged
-  })
+  res.redirect('misje' + '?id=' + req.body.mission)
 }
 
 async function userDetails(req, res) {
@@ -452,14 +435,7 @@ async function StworzMisjeZWzorcem(req, res) {
     privileged = false
   }
 
-  res.render('StworzMisjeZWzorcem', {
-    error: 'Dodano załogenta.',
-    message: res.message,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
-    privileged: privileged
-  })
+  res.redirect('misje')
 }
 
 //Logowanie
