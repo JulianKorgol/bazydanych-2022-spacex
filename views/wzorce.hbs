@@ -1,13 +1,19 @@
-<form action="StworzMisjeZWzorcem" method="GET" class="formularzWybieraniaWzorcaMisji">
-    <div class="mb-3">
-        <label for="listaWzorcow" class="form-label">Wybierz wzorzec</label>
-        <select name="listaWzorcow" id="listaWzorcow">
-            {{#each wzorce}}
-            <option value="{{this.id}}">{{this.nazwa}}</option>
-            {{/each}}
-        </select>
-        <div class="text-center mb-3">
-            <button class="btn btn-lg btn-primary">Wybierz</button>
+{{#if privileged}}
+    <form action="StworzMisjeZWzorcem" method="GET" class="formularzWybieraniaWzorcaMisji">
+        <div class="mb-3">
+            <label for="listaWzorcow" class="form-label">Wybierz wzorzec</label>
+            <select name="listaWzorcow" id="listaWzorcow">
+                {{#each wzorce}}
+                <option value="{{this.id}}">{{this.nazwa}}</option>
+                {{/each}}
+            </select>
+            <div class="text-center mb-3">
+                <button class="btn btn-lg btn-primary">Wybierz</button>
+            </div>
         </div>
+    </form>
+{{else}}
+    <div class="alert alert-danger mt-3" role="alert">
+        Nie masz uprawnień do tej strony
     </div>
-</form>
+{{/if}}
