@@ -1,16 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="centerPanel">
-                <div class="panelSelf">
-                    <a href="./utworzUzytkownika" class="btn btn-primary">Stwórz użytkownika</a>
-                    <a href="./StworzMisje" class="btn btn-primary">Stwórz misje</a>
-                </div>
-                <div class="panelSelf">
-                    <a href="./uzytkownicy" class="btn btn-secondary">Wyświetl użytkowników</a>
-                    <a href="./misje" class="btn btn-secondary">Wyświetl misje</a>
+{{#if privileged}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="centerPanel">
+                    <div class="panelSelf">
+                        <a href="./utworzUzytkownika" class="btn btn-primary">Stwórz użytkownika</a>
+                        <a href="./StworzMisje" class="btn btn-primary">Stwórz misje</a>
+                    </div>
+                    <div class="panelSelf">
+                        <a href="./uzytkownicy" class="btn btn-secondary">Wyświetl użytkowników</a>
+                        <a href="./misje" class="btn btn-secondary">Wyświetl misje</a>
+                    </div>
                 </div>
             </div>
         </div>
+    </nav>
+{{else}}
+    <div class="alert alert-danger mt-3" role="alert">
+        Nie masz uprawnień do tej strony
     </div>
-</nav>
+{{/if}}

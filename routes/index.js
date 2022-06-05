@@ -39,7 +39,11 @@ async function login(req, res) {
 
 async function homePage(req, res) {
   res.render('index', {
+<<<<<<< HEAD
     user: req.session?.userLogin
+=======
+    userLogin: req.session?.userLogin
+>>>>>>> 5a9edbc51807bb0834515facfc31fb198a139da8
   })
 }
 
@@ -233,7 +237,8 @@ async function createUser(req, res) {
 
   res.render('userCreate', {
     error: 'Dodano użytkownika.',
-    privileged: privileged
+    privileged: privileged,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -266,8 +271,13 @@ async function createMission(req, res) {
     error: 'Dodano misje.',
     isSuperAdmin: req.session?.isSuperAdmin,
     isAdmin: req.session?.isAdmin,
+<<<<<<< HEAD
     userLogin: req.session?.userLogin,
     privileged: privileged
+=======
+    privileged: privileged,
+    userLogin: req.session?.userLogin
+>>>>>>> 5a9edbc51807bb0834515facfc31fb198a139da8
   })
 }
 
@@ -291,7 +301,10 @@ async function panel(req, res) {
   else {
     privileged = false
   }
-  res.render('panel', {userLogin: req.session?.userLogin, privileged: privileged})
+  res.render('panel', {
+    userLogin: req.session?.userLogin, 
+    privileged: privileged
+  })
 }
 
 //Dodawanie załogentów do misji -> get
