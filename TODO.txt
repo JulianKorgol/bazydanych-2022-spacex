@@ -1,5 +1,5 @@
 High:
-- Dodanie wyświetlania daty w edycji misji
+- Dodanie wyświetlania daty w edycji misji - TODO
 
 Low:
 - Do hardcorować style - TODO
