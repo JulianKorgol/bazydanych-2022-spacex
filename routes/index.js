@@ -319,7 +319,7 @@ async function showFormAddCrewToMission(req, res) {
     if (status === "planowana") {
       result = await dbRequest
           .input('Idi', sql.Int, req.query.id)
-          .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
+          .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)')
       zalogenci = result.recordset
     } else {
       error = "Nie można dodać załogentów do misji, która jest w trakcie lub zakończona"
@@ -344,7 +344,6 @@ async function showFormAddCrewToMission(req, res) {
 }
 
 //Dodawanie załogentów do misji -> post
-// Nie działa zapytanie + odpowiedź serwera - TODO
 async function addCrewToMission(req, res) {
   let crew = []
 
