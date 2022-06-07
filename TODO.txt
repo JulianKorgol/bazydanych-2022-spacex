@@ -1,5 +1,4 @@
 High:
-- Usuwanie załogentów - TODO
 - Edycja misji:
 	- Brak możliwości dodania załogentów w trakcie wykonywania misji - TODO
 	- Brak możliwości zmiany statusu z w trakcie na planowana - TODO
