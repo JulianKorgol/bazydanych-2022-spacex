@@ -264,6 +264,17 @@ async function createMission(req, res) {
 }
 
 async function showFormCreateUser(req, res) {
+  let szefowie = []
+
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .query("SELECT id, imie, nazwisko FROM Uzytkownik WHERE rodzajUzytkownika = 'admin' OR rodzajUzytkownika = 'headadmin'")
+    szefowie = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać listy szefów.', err)
+  }
+
   if (req.session.isSuperAdmin) {
     privileged = true
   }
@@ -272,7 +283,8 @@ async function showFormCreateUser(req, res) {
   }
   res.render('userCreate', {
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    szefowie: szefowie
   })
 }
 
@@ -448,11 +460,11 @@ async function StworzMisjeZWzorcem(req, res) {
 
 async function DeleteMemberOfCrew(req, res) {
   try {
-    console.log(req.query)
     const dbRequest = await request()
     result = await dbRequest
         .input('Id', sql.Int, req.query.id)
-        .query('DELETE FROM Zaloga WHERE idUzytkownik = @Id')
+        .input('IdMisja', sql.Int, req.query.idMisji)
+        .query('DELETE FROM Zaloga WHERE idUzytkownik = @Id AND idMisja = @IdMisja')
   } catch (err) {
     console.error('Nie udało się usunąć użytkownika.', err)
   }
