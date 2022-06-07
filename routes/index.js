@@ -293,33 +293,40 @@ async function panel(req, res) {
 async function showFormAddCrewToMission(req, res) {
   let zalogenci = []
   let mission = []
+  let error = null
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('ID', sql.Int, req.query.id)
         .query('SELECT * FROM misja WHERE id = @ID')
     mission = result.recordset
+    const status = result.recordset[0].status
 
-    result = await dbRequest
-        .input('Idi', sql.Int, req.query.id)
-        .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
-    zalogenci = result.recordset
+    if (status === "planowana") {
+      result = await dbRequest
+          .input('Idi', sql.Int, req.query.id)
+          .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
+      zalogenci = result.recordset
+    } else {
+      error = "Nie można dodać załogentów do misji, która jest w trakcie lub zakończona"
+    }
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
   if (req.session.isAdmin || req.session.isSuperAdmin) {
     privileged = true
-  }
-  else {
+  } else {
     privileged = false
   }
   res.render('addCrew', {
+    error: error,
     zalogenci: zalogenci,
     mission: mission,
     message: res.message,
     privileged: privileged,
     userLogin: req.session?.userLogin
   })
+
 }
 
 //Dodawanie załogentów do misji -> post
