@@ -3,9 +3,6 @@ High:
 - Edycja misji:
 	- Brak możliwości zmiany statusu z w trakcie na planowana - TODO
 
-Normal:
-- Błąd przy usuwaniu załogentów
-
 Low:
 - Do hardcorować style - TODO
 - Uporządkować nazewnistwo plików z linkami - TODO

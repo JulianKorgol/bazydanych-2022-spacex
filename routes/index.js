@@ -463,8 +463,8 @@ async function DeleteMemberOfCrew(req, res) {
   try {
     const dbRequest = await request()
     result = await dbRequest
-        .input('Id', sql.Int, req.query.id)
-        .input('IdMisja', sql.Int, req.query.idMisji)
+        .input('Id', sql.Int, req.body.idUzytkownik)
+        .input('IdMisja', sql.Int, req.body.idMisja)
         .query('DELETE FROM Zaloga WHERE idUzytkownik = @Id AND idMisja = @IdMisja')
   } catch (err) {
     console.error('Nie udało się usunąć użytkownika.', err)
@@ -475,7 +475,7 @@ async function DeleteMemberOfCrew(req, res) {
   else {
     privileged = false
   }
-  res.redirect('misjaSzczegoly' + '?id=' + req.query.idMisja)
+  res.redirect('misjaSzczegoly' + '?id=' + req.body.idMisja)
 }
 
 async function editMission(req, res) {
@@ -536,7 +536,7 @@ router.get('/wzorce', showExamples)
 router.get('/StworzMisjeZWzorcem', StworzMisjeZWzorcemFormularz)
 router.post('/StworzMisjeZWzorcem', StworzMisjeZWzorcem)
 //Usuwanie użytkowników
-router.get('/deleteMember', DeleteMemberOfCrew)
+router.post('/deleteMember', DeleteMemberOfCrew)
 // Edytowaanie misji
 router.get('/editMission', editMission)
 module.exports = router;
