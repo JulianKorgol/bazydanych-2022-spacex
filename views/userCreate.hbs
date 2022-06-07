@@ -76,13 +76,10 @@
   </div>
   <div class="mb-3">
     <label for="rodzajUzytkownika" class="form-label">Rodzaj Użytkownika*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="rodzajUzytkownika"
-      id="rodzajUzytkownika"
-      required
-    />
+      <select name="rodzajUzytkownika" id="rodzajUzytkownika" required class="form-control">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+      </select>
   </div>
   <div class="mb-3">
     <label for="specjalizacja" class="form-label">Specjalizacja</label>
@@ -95,12 +92,11 @@
   </div>
   <div class="mb-3">
     <label for="SzefId" class="form-label">Szef ID</label>
-    <input
-      type="number"
-      class="form-control"
-      name="SzefId"
-      id="SzefId"
-    />
+      <select name="SzefId" id="SzefId" class="form-control">
+      {{#each szefowie}}
+          <option value="{{this.id}}">{{this.imie}} {{this.nazwisko}} ({{this.id}})</option>
+      {{/each}}
+      </select>
   </div>
   <div class="mb-3">
     <label for="haslo" class="form-label">Haslo*</label>

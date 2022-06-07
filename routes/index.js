@@ -264,6 +264,17 @@ async function createMission(req, res) {
 }
 
 async function showFormCreateUser(req, res) {
+  let szefowie = []
+
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .query("SELECT id, imie, nazwisko FROM Uzytkownik WHERE rodzajUzytkownika = 'admin' OR rodzajUzytkownika = 'headadmin'")
+    szefowie = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać listy szefów.', err)
+  }
+
   if (req.session.isSuperAdmin) {
     privileged = true
   }
@@ -272,7 +283,8 @@ async function showFormCreateUser(req, res) {
   }
   res.render('userCreate', {
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    szefowie: szefowie
   })
 }
 
