@@ -132,6 +132,9 @@ async function showDetailsOfMission(req, res) {
         .query('SELECT * FROM misja WHERE id = @ID')
     mission = result.recordset
 
+    mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
+    mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
+
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
         .query('SELECT * FROM Uzytkownik JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Z.idMisja = @Idi')
@@ -139,8 +142,7 @@ async function showDetailsOfMission(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
-  mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
-  mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
+
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
     privileged = true
   }
@@ -205,7 +207,6 @@ async function createUser(req, res) {
   try {
     const dbRequest = await request()
     result = await dbRequest
-        // Zwrot jakiejkolwiek informacji do użytkownika - TODO
         // https://github.com/tediousjs/node-mssql#data-types
         .input('Imie', sql.VarChar(30), req.body.imie)
         .input('Nazwisko', sql.VarChar(30), req.body.nazwisko)

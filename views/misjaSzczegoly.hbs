@@ -42,7 +42,12 @@
                     <td>{{this.nazwisko}}</td>
                     <td>{{this.miasto}} {{this.kodPocztowy}} {{this.ulica}} {{this.numerDomu}} {{this.numerMieszkania}}</td>
                     <td>{{this.specjalizacja}}</td>
-                    <td><a href="deleteMember?id={{this.idUzytkownik}}?idMisji={{this.idMisji}}">Usuń</a></td>
+                    <td>
+                        <form action="/deleteMember" method="POST">
+                            <input type="hidden" name="idUzytkownik" value="{{this.idUzytkownik}}">
+                            <input type="hidden" name="idMisja" value="{{this.idMisja}}">
+                            <input type="submit" value="Usuń">
+                        </form>
                 </tr>
             {{/each}}
         </table>
