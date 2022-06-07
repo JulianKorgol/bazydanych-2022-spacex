@@ -465,6 +465,32 @@ async function DeleteMemberOfCrew(req, res) {
   res.redirect('misjaSzczegoly' + '?id=' + req.query.idMisja)
 }
 
+async function editMission(req, res) {
+  let mission = []
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.id)
+        .query('SELECT * FROM Misja WHERE Misja.id = @Id')
+    mission = result.recordset
+    
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów misji.', err)
+  }
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+  res.render('editMission', {
+    mission: mission,
+    userLogin: req.session?.userLogin,
+    isSuperAdmin: req.session?.isSuperAdmin,
+    isAdmin: req.session?.isAdmin,
+    privileged: privileged,
+  })
+}
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
@@ -498,4 +524,6 @@ router.get('/StworzMisjeZWzorcem', StworzMisjeZWzorcemFormularz)
 router.post('/StworzMisjeZWzorcem', StworzMisjeZWzorcem)
 //Usuwanie użytkowników
 router.get('/deleteMember', DeleteMemberOfCrew)
+// Edytowaanie misji
+router.get('/editMission', editMission)
 module.exports = router;
