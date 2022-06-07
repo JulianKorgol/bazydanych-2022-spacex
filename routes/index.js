@@ -460,11 +460,11 @@ async function StworzMisjeZWzorcem(req, res) {
 
 async function DeleteMemberOfCrew(req, res) {
   try {
-    console.log(req.query)
     const dbRequest = await request()
     result = await dbRequest
         .input('Id', sql.Int, req.query.id)
-        .query('DELETE FROM Zaloga WHERE idUzytkownik = @Id')
+        .input('IdMisja', sql.Int, req.query.idMisji)
+        .query('DELETE FROM Zaloga WHERE idUzytkownik = @Id AND idMisja = @IdMisja')
   } catch (err) {
     console.error('Nie udało się usunąć użytkownika.', err)
   }
