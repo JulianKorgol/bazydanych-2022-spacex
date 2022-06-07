@@ -125,6 +125,7 @@ async function showMissions(req, res) {
 //Wyświetlanie szczegółów misji
 async function showDetailsOfMission(req, res) {
   let zalogent = []
+  let mission = []
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -484,9 +485,34 @@ async function editMission(req, res) {
     const dbRequest = await request()
     result = await dbRequest
         .input('Id', sql.Int, req.query.id)
-        .query('SELECT * FROM Misja WHERE Misja.id = @Id')
-    mission = result.recordset
+        .input('Nazwa', sql.VarChar(150), req.body.nazwa)
+        .input('Opis', sql.VarChar(10000), req.body.opis)
+        .input('Status', sql.VarChar(10), req.body.status)
+        .input('terminRozpoczecia', sql.DateTime, req.body.terminRozpoczecia)
+        .input('terminZakonczenia', sql.DateTime, req.body.terminZakonczenia)
+        .query("UPDATE Misja SET nazwa = @Nazwa, opis = @Opis, status = @Status, terminRozpoczecia = @terminRozpoczecia, terminZakonczenia = @terminZakonczenia WHERE id = @Id")
     
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów misji.', err)
+  }
+  res.redirect('misjaSzczegoly' + '?id=' + req.query.id)
+}
+
+async function editMissionShowForm(req, res) {
+  let mission = []
+  let error = null
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.id)
+        .query('SELECT * FROM Misja WHERE Misja.id = @Id')
+    const status = result.recordset[0].status
+
+    if (status === "planowana") {
+      mission = result.recordset
+    } else {
+      error = "Nie można edytować misji w tym stanie."
+    }
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
@@ -497,6 +523,7 @@ async function editMission(req, res) {
     privileged = false
   }
   res.render('editMission', {
+    error: error,
     mission: mission,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
@@ -504,6 +531,7 @@ async function editMission(req, res) {
     privileged: privileged,
   })
 }
+
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
@@ -538,5 +566,6 @@ router.post('/StworzMisjeZWzorcem', StworzMisjeZWzorcem)
 //Usuwanie użytkowników
 router.post('/deleteMember', DeleteMemberOfCrew)
 // Edytowaanie misji
-router.get('/editMission', editMission)
+router.get('/editMission', editMissionShowForm)
+router.post('/editMission', editMission)
 module.exports = router;

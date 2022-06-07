@@ -1,7 +1,5 @@
 High:
-- Zmiana statusu misji - TODO
-- Edycja misji:
-	- Brak możliwości zmiany statusu z w trakcie na planowana - TODO
+- Dodanie wyświetlania daty w edycji misji
 
 Low:
 - Do hardcorować style - TODO
