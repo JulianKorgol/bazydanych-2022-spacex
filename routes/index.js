@@ -125,12 +125,16 @@ async function showMissions(req, res) {
 //Wyświetlanie szczegółów misji
 async function showDetailsOfMission(req, res) {
   let zalogent = []
+  let mission = []
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('ID', sql.Int, req.query.id)
         .query('SELECT * FROM misja WHERE id = @ID')
     mission = result.recordset
+
+    mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
+    mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
 
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
@@ -139,8 +143,7 @@ async function showDetailsOfMission(req, res) {
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
-  mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
-  mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
+
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
     privileged = true
   }
@@ -205,7 +208,6 @@ async function createUser(req, res) {
   try {
     const dbRequest = await request()
     result = await dbRequest
-        // Zwrot jakiejkolwiek informacji do użytkownika - TODO
         // https://github.com/tediousjs/node-mssql#data-types
         .input('Imie', sql.VarChar(30), req.body.imie)
         .input('Nazwisko', sql.VarChar(30), req.body.nazwisko)
@@ -232,11 +234,7 @@ async function createUser(req, res) {
     privileged = false
   }
 
-  res.render('userCreate', {
-    error: 'Dodano użytkownika.',
-    privileged: privileged,
-    userLogin: req.session?.userLogin
-  })
+  res.redirect('uzytkownicy');
 }
 
 // Tworzenie misji
@@ -264,16 +262,21 @@ async function createMission(req, res) {
     privileged = false
   }
 
-  res.render('panel', {
-    error: 'Dodano misje.',
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
-    privileged: privileged,
-    userLogin: req.session?.userLogin
-  })
+  res.redirect('misje')
 }
 
 async function showFormCreateUser(req, res) {
+  let szefowie = []
+
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .query("SELECT id, imie, nazwisko FROM Uzytkownik WHERE rodzajUzytkownika = 'admin' OR rodzajUzytkownika = 'headadmin'")
+    szefowie = result.recordset
+  } catch (err) {
+    console.error('Nie udało się pobrać listy szefów.', err)
+  }
+
   if (req.session.isSuperAdmin) {
     privileged = true
   }
@@ -282,7 +285,8 @@ async function showFormCreateUser(req, res) {
   }
   res.render('userCreate', {
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    szefowie: szefowie
   })
 }
 
@@ -303,37 +307,43 @@ async function panel(req, res) {
 async function showFormAddCrewToMission(req, res) {
   let zalogenci = []
   let mission = []
+  let error = null
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('ID', sql.Int, req.query.id)
         .query('SELECT * FROM misja WHERE id = @ID')
     mission = result.recordset
+    const status = result.recordset[0].status
 
-    result = await dbRequest
-        .input('Idi', sql.Int, req.query.id)
-        .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)') //Sprawić, żeby działało :D - TODO
-    zalogenci = result.recordset
+    if (status === "planowana") {
+      result = await dbRequest
+          .input('Idi', sql.Int, req.query.id)
+          .query('SELECT * FROM Uzytkownik where not id in (SELECT U.id from Uzytkownik U join Zaloga Z on U.id = Z.idUzytkownik join Misja M on Z.idMisja = M.id where Z.idMisja = @Idi)')
+      zalogenci = result.recordset
+    } else {
+      error = "Nie można dodać załogentów do misji, która jest w trakcie lub zakończona"
+    }
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
   if (req.session.isAdmin || req.session.isSuperAdmin) {
     privileged = true
-  }
-  else {
+  } else {
     privileged = false
   }
   res.render('addCrew', {
+    error: error,
     zalogenci: zalogenci,
     mission: mission,
     message: res.message,
     privileged: privileged,
     userLogin: req.session?.userLogin
   })
+
 }
 
 //Dodawanie załogentów do misji -> post
-// Nie działa zapytanie + odpowiedź serwera - TODO
 async function addCrewToMission(req, res) {
   let crew = []
 
@@ -354,18 +364,12 @@ async function addCrewToMission(req, res) {
     privileged = false
   }
 
-  res.render('addCrew', {
-    error: 'Dodano załogenta.',
-    message: res.message,
-    userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
-    privileged: privileged
-  })
+  res.redirect('misje' + '?id=' + req.body.mission)
 }
 
 async function userDetails(req, res) {
   let user = []
+  console.log(req.query)
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -452,13 +456,78 @@ async function StworzMisjeZWzorcem(req, res) {
     privileged = false
   }
 
-  res.render('StworzMisjeZWzorcem', {
-    error: 'Dodano załogenta.',
-    message: res.message,
+  res.redirect('misje')
+}
+
+async function DeleteMemberOfCrew(req, res) {
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.body.idUzytkownik)
+        .input('IdMisja', sql.Int, req.body.idMisja)
+        .query('DELETE FROM Zaloga WHERE idUzytkownik = @Id AND idMisja = @IdMisja')
+  } catch (err) {
+    console.error('Nie udało się usunąć użytkownika.', err)
+  }
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+  res.redirect('misjaSzczegoly' + '?id=' + req.body.idMisja)
+}
+
+async function editMission(req, res) {
+  let mission = []
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.id)
+        .input('Nazwa', sql.VarChar(150), req.body.nazwa)
+        .input('Opis', sql.VarChar(10000), req.body.opis)
+        .input('Status', sql.VarChar(10), req.body.status)
+        .input('terminRozpoczecia', sql.DateTime, req.body.terminRozpoczecia)
+        .input('terminZakonczenia', sql.DateTime, req.body.terminZakonczenia)
+        .query("UPDATE Misja SET nazwa = @Nazwa, opis = @Opis, status = @Status, terminRozpoczecia = @terminRozpoczecia, terminZakonczenia = @terminZakonczenia WHERE id = @Id")
+    
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów misji.', err)
+  }
+  res.redirect('misjaSzczegoly' + '?id=' + req.query.id)
+}
+
+async function editMissionShowForm(req, res) {
+  let mission = []
+  let error = null
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.id)
+        .query('SELECT * FROM Misja WHERE Misja.id = @Id')
+    const status = result.recordset[0].status
+
+    if (status === "planowana") {
+      mission = result.recordset
+    } else {
+      error = "Nie można edytować misji w tym stanie."
+    }
+  } catch (err) {
+    console.error('Nie udało się pobrać szczegółów misji.', err)
+  }
+  if (req.session.isSuperAdmin || req.session.isAdmin) {
+    privileged = true
+  }
+  else {
+    privileged = false
+  }
+  res.render('editMission', {
+    error: error,
+    mission: mission,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
     isAdmin: req.session?.isAdmin,
-    privileged: privileged
+    privileged: privileged,
   })
 }
 
@@ -510,6 +579,9 @@ router.get('/wzorce', showExamples)
 //Stwórz misje na podstawie wzorca
 router.get('/StworzMisjeZWzorcem', StworzMisjeZWzorcemFormularz)
 router.post('/StworzMisjeZWzorcem', StworzMisjeZWzorcem)
-// Usuwanie użytkownika 
-router.post('/userDelete', deleteUser)
+//Usuwanie użytkowników
+router.post('/deleteMember', DeleteMemberOfCrew)
+// Edytowaanie misji
+router.get('/editMission', editMissionShowForm)
+router.post('/editMission', editMission)
 module.exports = router;
