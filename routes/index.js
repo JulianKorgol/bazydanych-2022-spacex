@@ -367,7 +367,7 @@ async function addCrewToMission(req, res) {
     privileged = false
   }
 
-  res.redirect('misje' + '?id=' + req.body.mission)
+  res.redirect('misjaSzczegoly' + '?id=' + req.body.mission)
 }
 
 async function userDetails(req, res) {
