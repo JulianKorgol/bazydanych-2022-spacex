@@ -497,15 +497,31 @@ async function editMission(req, res) {
   res.redirect('misjaSzczegoly' + '?id=' + req.query.id)
 }
 
+//Convert date
+function editMissionDataFix(date) {
+  new date.toISOString().replace(/T/, ' ').replace(/\..+/, '')
+
+  console.log(date)
+
+  return date
+}
+
+
 async function editMissionShowForm(req, res) {
   let mission = []
   let error = null
+  let terminRozpoczecia = null
+  let terminZakonczenia = null
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('Id', sql.Int, req.query.id)
         .query('SELECT * FROM Misja WHERE Misja.id = @Id')
     const status = result.recordset[0].status
+    const terminRozpoczecia = editMissionDataFix(result.recordset[0].terminRozpoczecia)
+    const terminZakonczenia = editMissionDataFix(result.recordset[0].terminZakonczenia)
+
+    console.log(terminRozpoczecia)
 
     if (status === "planowana") {
       mission = result.recordset
@@ -523,6 +539,8 @@ async function editMissionShowForm(req, res) {
   }
   res.render('editMission', {
     error: error,
+    terminRozpoczecia: terminRozpoczecia,
+    terminZakonczenia: terminZakonczenia,
     mission: mission,
     userLogin: req.session?.userLogin,
     isSuperAdmin: req.session?.isSuperAdmin,
