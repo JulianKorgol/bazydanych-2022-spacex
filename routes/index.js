@@ -39,11 +39,8 @@ async function login(req, res) {
 
 async function homePage(req, res) {
   res.render('index', {
-<<<<<<< HEAD
-    user: req.session?.userLogin
-=======
+    user: req.session?.userLogin,
     userLogin: req.session?.userLogin
->>>>>>> 5a9edbc51807bb0834515facfc31fb198a139da8
   })
 }
 
@@ -271,13 +268,8 @@ async function createMission(req, res) {
     error: 'Dodano misje.',
     isSuperAdmin: req.session?.isSuperAdmin,
     isAdmin: req.session?.isAdmin,
-<<<<<<< HEAD
-    userLogin: req.session?.userLogin,
-    privileged: privileged
-=======
     privileged: privileged,
     userLogin: req.session?.userLogin
->>>>>>> 5a9edbc51807bb0834515facfc31fb198a139da8
   })
 }
 
@@ -470,6 +462,23 @@ async function StworzMisjeZWzorcem(req, res) {
   })
 }
 
+async function deleteUser(req, res) {
+  try {
+    const dbRequest = await request()
+    result = await dbRequest
+        .input('Id', sql.Int, req.query.id)
+        .query('DELETE FROM Uzytkownik WHERE id = @Id')
+  } catch (err) {
+    console.error('Nie udało się usunąć użytkownika.', err)
+    res.redirect('/users')
+  }
+  res.redirect('/users',
+    { message: 'Użytkownik został usunięty.' ,
+      userLogin: req.session?.userLogin,
+      isSuperAdmin: req.session?.isSuperAdmin,
+      isAdmin: req.session?.isAdmin
+    })
+}
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
@@ -501,4 +510,6 @@ router.get('/wzorce', showExamples)
 //Stwórz misje na podstawie wzorca
 router.get('/StworzMisjeZWzorcem', StworzMisjeZWzorcemFormularz)
 router.post('/StworzMisjeZWzorcem', StworzMisjeZWzorcem)
+// Usuwanie użytkownika 
+router.post('/userDelete', deleteUser)
 module.exports = router;
