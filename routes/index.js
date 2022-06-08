@@ -1,6 +1,7 @@
 const express = require('express')
 const req = require('express/lib/request')
 const async = require('hbs/lib/async')
+const moment = require('moment')
 const sql = require('mssql')
 const router = express.Router()
 const { request } = require('../database')
@@ -497,16 +498,6 @@ async function editMission(req, res) {
   res.redirect('misjaSzczegoly' + '?id=' + req.query.id)
 }
 
-//Convert date
-function editMissionDataFix(date) {
-  new date.toISOString().replace(/T/, ' ').replace(/\..+/, '')
-
-  console.log(date)
-
-  return date
-}
-
-
 async function editMissionShowForm(req, res) {
   let mission = []
   let error = null
@@ -518,11 +509,11 @@ async function editMissionShowForm(req, res) {
         .input('Id', sql.Int, req.query.id)
         .query('SELECT * FROM Misja WHERE Misja.id = @Id')
     const status = result.recordset[0].status
-    const terminRozpoczecia = editMissionDataFix(result.recordset[0].terminRozpoczecia)
-    const terminZakonczenia = editMissionDataFix(result.recordset[0].terminZakonczenia)
 
-    console.log(terminRozpoczecia)
+    result.recordset[0].terminRozpoczecia =  moment(result.recordset[0].terminRozpoczecia).format('YYYY-MM-DD')
+    result.recordset[0].terminZakonczenia =  moment(result.recordset[0].terminZakonczenia).format('YYYY-MM-DD')
 
+    console.log(result.recordset)
     if (status === "planowana") {
       mission = result.recordset
     } else {
