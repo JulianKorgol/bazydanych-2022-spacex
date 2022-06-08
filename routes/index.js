@@ -531,23 +531,6 @@ async function editMissionShowForm(req, res) {
   })
 }
 
-async function deleteUser(req, res) {
-  try {
-    const dbRequest = await request()
-    result = await dbRequest
-        .input('Id', sql.Int, req.query.id)
-        .query('DELETE FROM Uzytkownik WHERE id = @Id')
-  } catch (err) {
-    console.error('Nie udało się usunąć użytkownika.', err)
-    res.redirect('/users')
-  }
-  res.redirect('/users',
-    { message: 'Użytkownik został usunięty.' ,
-      userLogin: req.session?.userLogin,
-      isSuperAdmin: req.session?.isSuperAdmin,
-      isAdmin: req.session?.isAdmin
-    })
-}
 //Logowanie
 router.get('/login', showLoginForm);
 router.post('/login', login);
