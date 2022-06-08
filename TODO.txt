@@ -1,5 +1,2 @@
-High:
-- Dodanie wyświetlania daty w edycji misji - TODO
-
 Low:
 - Uporządkować nazewnistwo plików z linkami - TODO
