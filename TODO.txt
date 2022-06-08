@@ -2,9 +2,4 @@ High:
 - Dodanie wyświetlania daty w edycji misji - TODO
 
 Low:
-- Do hardcorować style - TODO
 - Uporządkować nazewnistwo plików z linkami - TODO
-
-
-Przed oddaniem:
-- Testowanie wszystkiego
