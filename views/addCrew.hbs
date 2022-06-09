@@ -4,13 +4,6 @@
             {{error}}
         </div>
     {{else}}
-        <div>
-            <a href="/panel">Panel</a>
-            {{#each mission}}
-                <a href="/misjaSzczegoly?id={{this.id}}">Powrót do szczegółów misji</a>
-                <a href="/addCrew?id={{this.id}}">Dodaj następnego</a>
-            {{/each}}
-        </div>
     {{#each mission}}
         <h1 class="title">Dodawanie załogentów do misji: {{this.nazwa}}</h1>
         <p id="idMisji">ID misji: {{this.id}}</p>
