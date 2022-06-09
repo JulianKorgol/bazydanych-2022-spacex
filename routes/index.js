@@ -429,8 +429,6 @@ async function StworzMisjeZWzorcemFormularz(req, res) {
     wzorzec: wzorzec,
     message: res.message,
     userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
     privileged: privileged
   })
 }
@@ -503,8 +501,6 @@ async function editMission(req, res) {
 async function editMissionShowForm(req, res) {
   let mission = []
   let error = null
-  let terminRozpoczecia = null
-  let terminZakonczenia = null
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -515,7 +511,6 @@ async function editMissionShowForm(req, res) {
     result.recordset[0].terminRozpoczecia =  moment(result.recordset[0].terminRozpoczecia).format('YYYY-MM-DD')
     result.recordset[0].terminZakonczenia =  moment(result.recordset[0].terminZakonczenia).format('YYYY-MM-DD')
 
-    console.log(result.recordset)
     if (status === "planowana") {
       mission = result.recordset
     } else {
@@ -532,12 +527,8 @@ async function editMissionShowForm(req, res) {
   }
   res.render('editMission', {
     error: error,
-    terminRozpoczecia: terminRozpoczecia,
-    terminZakonczenia: terminZakonczenia,
     mission: mission,
     userLogin: req.session?.userLogin,
-    isSuperAdmin: req.session?.isSuperAdmin,
-    isAdmin: req.session?.isAdmin,
     privileged: privileged,
   })
 }
