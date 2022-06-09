@@ -1,10 +1,10 @@
-{{#if error}}
-    <div class="alert alert-danger mt-3" role="alert">
-        {{error}}
-    </div>
-{{/if}}
-<div>
-    {{#if privileged}}
+{{#if privileged}}
+    {{#if error}}
+        <div class="alert alert-danger mt-3" role="alert">
+            {{error}}
+        </div>
+    {{else}}
+        <div>
         {{#each mission}}
             <h1 class="title">Szczegóły misji {{this.nazwa}}</h1>
         {{/each}}
@@ -63,6 +63,7 @@
         </div>
         {{/each}}
     </div>
+    {{/if}}
    {{else}}
         <div class="alert alert-danger mt-3" role="alert">
         Nie masz uprawnień do tej strony
