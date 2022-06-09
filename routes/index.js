@@ -148,12 +148,7 @@ async function showDetailsOfMission(req, res) {
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
         .query('SELECT * FROM Uzytkownik JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Z.idMisja = @Idi')
-
-    if (result.rowsAffected[0] === 1) {
-      zalogent = result.recordset
-    } else {
-      error = "Coś poszło nie tak, spróbuj ponownie."
-    }
+    zalogent = result.recordset
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
