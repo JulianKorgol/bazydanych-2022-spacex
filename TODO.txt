@@ -1,6 +1,6 @@
 High:
 - Wyświetlanie błędów i walidacja formularzy - TODO -> Mateusz
-- Nie wyświetlanie niczego, przy braku danych z bazy danych - TODO
+- Nie wyświetlanie niczego, przy braku danych z bazy danych - TODO -> Julian
 
 Low:
 - Uporządkować nazewnistwo plików z linkami - TODO

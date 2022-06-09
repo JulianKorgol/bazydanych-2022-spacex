@@ -50,7 +50,7 @@ async function homePage(req, res) {
 function logout(req, res) {
   req.session.destroy();
 
-  homePage(req, res);
+  res.redirect('/', code=302)
 }
 
 // Wyświetlanie listy użytkowników
@@ -77,7 +77,7 @@ async function showCrew(req, res) {
     crew: crew,
     message: res.message,
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
   })
 }
 
@@ -129,20 +129,31 @@ async function showMissions(req, res) {
 async function showDetailsOfMission(req, res) {
   let zalogent = []
   let mission = []
+  let error
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('ID', sql.Int, req.query.id)
         .query('SELECT * FROM misja WHERE id = @ID')
-    mission = result.recordset
 
-    mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
-    mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
+    if (result.rowsAffected[0] === 1) {
+      mission = result.recordset
+
+      mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
+      mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
+    } else {
+      error = "Coś poszło nie tak, spróbuj ponownie."
+    }
 
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
         .query('SELECT * FROM Uzytkownik JOIN Zaloga Z on Uzytkownik.id = Z.idUzytkownik WHERE Z.idMisja = @Idi')
-    zalogent = result.recordset
+
+    if (result.rowsAffected[0] === 1) {
+      zalogent = result.recordset
+    } else {
+      error = "Coś poszło nie tak, spróbuj ponownie."
+    }
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
   }
@@ -158,7 +169,8 @@ async function showDetailsOfMission(req, res) {
     mission: mission,
     message: res.message,
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    error: error
   })
 }
 
