@@ -1,21 +1,46 @@
-{{#if privileged}}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="centerPanel">
-                    <div class="panelSelf">
-                        <a href="./utworzUzytkownika" class="btn btn-primary">Stwórz użytkownika</a>
-                        <a href="./StworzMisje" class="btn btn-primary">Stwórz misje</a>
-                    </div>
-                    <div class="panelSelf">
-                        <a href="./uzytkownicy" class="btn btn-secondary">Wyświetl użytkowników</a>
-                        <a href="./misje" class="btn btn-secondary">Wyświetl misje</a>
+{{#if user}}
+    <h1 class="title">Lista Twoich Misji</h1>
+    <table>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Status</th>
+        <th>Termin Rozpoczęcia</th>
+        <th>Termin Zakończenia</th>
+        <th></th>
+        {{#each mission}}
+            <div class="Misje">
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.nazwa}}</td>
+                    <td>{{this.opis}}</td>
+                    <td>{{this.status}}</td>
+                    <td>{{this.terminRozpoczecia}}</td>
+                    <td>{{this.terminZakonczenia}}</td>
+                </tr>
+            </div>
+        {{/each}}
+    </table>
+    {{/if}}
+    {{#if privileged}}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="centerPanel">
+                        <div class="panelSelf">
+                            <a href="./utworzUzytkownika" class="btn btn-primary">Stwórz użytkownika</a>
+                            <a href="./StworzMisje" class="btn btn-primary">Stwórz misje</a>
+                        </div>
+                        <div class="panelSelf">
+                            <a href="./uzytkownicy" class="btn btn-secondary">Wyświetl użytkowników</a>
+                            <a href="./misje" class="btn btn-secondary">Wyświetl misje</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-{{else}}
+        </nav>
+    {{/if}}
+{{#if NotLoggedIn}}
     <div class="alert alert-danger mt-3" role="alert">
         Nie masz uprawnień do tej strony
     </div>

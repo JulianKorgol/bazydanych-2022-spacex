@@ -296,15 +296,37 @@ async function showFormCreateUser(req, res) {
 }
 
 async function panel(req, res) {
+  let mission
+  let user
+  let NotLoggedIn = true
+
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
     privileged = true
+    NotLoggedIn = false
   }
-  else {
+  else if (req.session.userLogin !== undefined) {
+    privileged = false
+    user = true
+    NotLoggedIn = false
+
+    try {
+      const dbRequest = await request()
+      result = await dbRequest
+          .input('Login', sql.VarChar(150), req.session.userLogin)
+          .query("SELECT Misja.id id, nazwa, opis, status, terminRozpoczecia, terminZakonczenia FROM Misja FULL OUTER JOIN Zaloga Z on Misja.id = Z.idMisja JOIN Uzytkownik U on U.id = Z.idUzytkownik WHERE login = @Login")
+      mission = result.recordset
+    } catch (err) {
+      console.error('Nie udało się pobrać listy szefów.', err)
+    }
+  } else {
     privileged = false
   }
   res.render('panel', {
+    mission: mission,
+    user: user,
     userLogin: req.session?.userLogin, 
-    privileged: privileged
+    privileged: privileged,
+    NotLoggedIn: NotLoggedIn,
   })
 }
 
