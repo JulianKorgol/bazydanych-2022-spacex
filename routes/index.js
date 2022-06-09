@@ -228,6 +228,8 @@ async function createUser(req, res) {
             '(@Imie, @Nazwisko, @Ulica, @NumerDomu, @NumerMieszkania, @Miasto, @KodPocztowy, @RodzajUzytkownika, @Specjalizacja, @SzefId, @Haslo, @Login)')
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
+    // res.render()
+    // return
   }
 
   if(req.session.isSuperAdmin || req.session.isAdmin)  {

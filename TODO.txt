@@ -1,2 +1,8 @@
+High:
+- Po zalogowaniu o randze user miał dostęp do wyświetlania swoich misji - TODO
+- Wyświetlanie błędu przy dodawaniu niepoprawnej misji - TODO
+- Wyświetlanie błędów i walidacja formularzy - TODO
+- Nie wyświetlanie niczego, przy braku danych z bazy danych - TODO
+
 Low:
 - Uporządkować nazewnistwo plików z linkami - TODO
