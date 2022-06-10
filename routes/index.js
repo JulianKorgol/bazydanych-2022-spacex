@@ -193,15 +193,27 @@ async function showExamples(req, res) {
 }
 
 async function showMisjaCreateForm(req, res) {
+  req.session.date = new Date()
+  let month = req.session.date.getMonth() + 1
+  if (month < 10) {
+    month = '0' + month
+  }
+  let day = req.session.date.getDate() + 1
+  if (day < 10) {
+    day = '0' + day
+  }
+  let date =   req.session.date.getFullYear() + "-" + month + "-" + day
   if (req.session.isSuperAdmin) {
     privileged = true
   }
   else {
     privileged = false
   }
+  console.log(date)
   res.render('misjaCreate', {
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    date: date
   })
 }
 // Tworzenie użytkowników
@@ -258,6 +270,7 @@ async function createMission(req, res) {
             '(@Nazwa, @Opis, @terminRozpoczecia, @terminZakonczenia, @Status)')
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
+    message = 'Nie udało się dodać misji.'
   }
 
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
@@ -266,8 +279,16 @@ async function createMission(req, res) {
   else {
     privileged = false
   }
-
-  res.redirect('misje')
+  if (message) {
+    res.render('misjaCreate', {
+      message: message,
+      userLogin: req.session?.userLogin,
+      privileged: privileged
+  })
+}
+  else {
+    res.redirect('misje')
+  }
 }
 
 async function showFormCreateUser(req, res) {
@@ -374,7 +395,6 @@ async function addCrewToMission(req, res) {
 
 async function userDetails(req, res) {
   let user = []
-  console.log(req.query)
   try {
     const dbRequest = await request()
     result = await dbRequest

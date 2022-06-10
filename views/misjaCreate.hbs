@@ -1,4 +1,9 @@
 {{#if privileged}}
+{{#if message}}
+<div class="alert alert-danger" role="alert">
+  {{message}}
+</div>
+{{/if}}
     <form action="" method="POST" class="formularzTworzeniaMisji">
         <div class="mb-3">
             <label for="nazwa" class="form-label">Nazwa*</label>
@@ -26,6 +31,7 @@
             class="form-control"
             name="terminRozpoczecia"
             id="terminRozpoczecia"
+            min="{{date}}"
             required
             />
         </div>
@@ -36,6 +42,7 @@
             class="form-control"
             name="terminZakonczenia"
             id="terminZakonczenia"
+            min="{{date}}"
             required
             />
         </div>
