@@ -50,7 +50,7 @@ async function homePage(req, res) {
 function logout(req, res) {
   req.session.destroy();
 
-  res.redirect('/', code=302)
+  homePage(req, res);
 }
 
 // Wyświetlanie listy użytkowników
@@ -77,7 +77,7 @@ async function showCrew(req, res) {
     crew: crew,
     message: res.message,
     privileged: privileged,
-    userLogin: req.session?.userLogin,
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -129,21 +129,15 @@ async function showMissions(req, res) {
 async function showDetailsOfMission(req, res) {
   let zalogent = []
   let mission = []
-  let error
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('ID', sql.Int, req.query.id)
         .query('SELECT * FROM misja WHERE id = @ID')
+    mission = result.recordset
 
-    if (result.rowsAffected[0] === 1) {
-      mission = result.recordset
-
-      mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
-      mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
-    } else {
-      error = "Coś poszło nie tak, spróbuj ponownie."
-    }
+    mission[0].terminRozpoczecia = dataFix(mission[0].terminRozpoczecia)
+    mission[0].terminZakonczenia = dataFix(mission[0].terminZakonczenia)
 
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
@@ -164,8 +158,7 @@ async function showDetailsOfMission(req, res) {
     mission: mission,
     message: res.message,
     privileged: privileged,
-    userLogin: req.session?.userLogin,
-    error: error
+    userLogin: req.session?.userLogin
   })
 }
 
@@ -226,7 +219,7 @@ async function showMisjaCreateForm(req, res) {
 // Tworzenie użytkowników
 async function createUser(req, res) {
   let user = []
-
+  error = undefined
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -247,8 +240,7 @@ async function createUser(req, res) {
             '(@Imie, @Nazwisko, @Ulica, @NumerDomu, @NumerMieszkania, @Miasto, @KodPocztowy, @RodzajUzytkownika, @Specjalizacja, @SzefId, @Haslo, @Login)')
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
-    // res.render()
-    // return
+    error = "Nie udało się dodać użytkownika."
   }
 
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
@@ -257,14 +249,22 @@ async function createUser(req, res) {
   else {
     privileged = false
   }
-
+  if (error === undefined) {
   res.redirect('uzytkownicy');
+}
+  else {
+    res.render('userCreate', {
+      error: error,
+      userLogin: req.session?.userLogin,
+      privileged: privileged
+    })
+  }
 }
 
 // Tworzenie misji
 async function createMission(req, res) {
   let mission = []
-
+  message = undefined
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -277,7 +277,7 @@ async function createMission(req, res) {
             '(@Nazwa, @Opis, @terminRozpoczecia, @terminZakonczenia, @Status)')
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
-    message = 'Nie udało się dodać misji.'
+    error = 'Nie udało się dodać misji.'
   }
 
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
@@ -286,9 +286,9 @@ async function createMission(req, res) {
   else {
     privileged = false
   }
-  if (message) {
+  if (error != undefined) {
     res.render('misjaCreate', {
-      message: message,
+      error: error,
       userLogin: req.session?.userLogin,
       privileged: privileged
   })
@@ -324,37 +324,15 @@ async function showFormCreateUser(req, res) {
 }
 
 async function panel(req, res) {
-  let mission
-  let user
-  let NotLoggedIn = true
-
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
     privileged = true
-    NotLoggedIn = false
   }
-  else if (req.session.userLogin !== undefined) {
-    privileged = false
-    user = true
-    NotLoggedIn = false
-
-    try {
-      const dbRequest = await request()
-      result = await dbRequest
-          .input('Login', sql.VarChar(150), req.session.userLogin)
-          .query("SELECT Misja.id id, nazwa, opis, status, terminRozpoczecia, terminZakonczenia FROM Misja FULL OUTER JOIN Zaloga Z on Misja.id = Z.idMisja JOIN Uzytkownik U on U.id = Z.idUzytkownik WHERE login = @Login")
-      mission = result.recordset
-    } catch (err) {
-      console.error('Nie udało się pobrać listy szefów.', err)
-    }
-  } else {
+  else {
     privileged = false
   }
   res.render('panel', {
-    mission: mission,
-    user: user,
     userLogin: req.session?.userLogin, 
-    privileged: privileged,
-    NotLoggedIn: NotLoggedIn,
+    privileged: privileged
   })
 }
 
