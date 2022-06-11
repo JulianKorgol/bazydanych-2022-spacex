@@ -403,18 +403,28 @@ async function addCrewToMission(req, res) {
 
 async function userDetails(req, res) {
   let user = []
-  console.log(req.query)
+  let mission = []
+  let error = null
+
   try {
     const dbRequest = await request()
     result = await dbRequest
         .input('Id', sql.Int, req.query.id)
         .query('SELECT * FROM Uzytkownik WHERE Uzytkownik.id = @Id')
-    user = result.recordset
+    if (result.rowsAffected[0] === 1) {
+      user = result.recordset
+    } else {
+      error = "Coś poszło nie tak, spróbuj ponownie."
+    }
 
     result = await dbRequest
         .input('Idi', sql.Int, req.query.id)
         .query('SELECT Misja.id AS id, nazwa as nazwa, opis as opis, status as status, terminRozpoczecia as terminRozpoczecia, terminZakonczenia as terminZakonczenia FROM Misja JOIN Zaloga Z on Misja.id = Z.idMisja WHERE idUzytkownik = @Idi')
-    mission = result.recordset
+    if (result.rowsAffected[0] >= 0) {
+      mission = result.recordset
+    } else {
+      error = "Coś poszło nie tak, spróbuj ponownie."
+    }
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów użytkownika.', err)
   }
@@ -432,19 +442,26 @@ async function userDetails(req, res) {
     user: user,
     mission: mission,
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    error: error
   })
 }
 
 async function StworzMisjeZWzorcemFormularz(req, res) {
   let wzorzec = []
+  let error = null
+
   try {
     const dbRequest = await request()
 
     result = await dbRequest
         .input('Id', sql.Int, req.query.listaWzorcow)
         .query('SELECT * FROM WzorceMisji WHERE id = @Id')
-    wzorzec = result.recordset
+    if (result.rowsAffected[0] === 1) {
+      wzorzec = result.recordset
+    } else {
+      error = "Coś poszło nie tak, spróbuj ponownie."
+    }
   } catch (err) {
     console.error('Nie udało się pobrać wzorca misji.', err)
   }
@@ -460,7 +477,8 @@ async function StworzMisjeZWzorcemFormularz(req, res) {
     wzorzec: wzorzec,
     message: res.message,
     userLogin: req.session?.userLogin,
-    privileged: privileged
+    privileged: privileged,
+    error: error
   })
 }
 
@@ -537,15 +555,20 @@ async function editMissionShowForm(req, res) {
     result = await dbRequest
         .input('Id', sql.Int, req.query.id)
         .query('SELECT * FROM Misja WHERE Misja.id = @Id')
-    const status = result.recordset[0].status
 
-    result.recordset[0].terminRozpoczecia =  moment(result.recordset[0].terminRozpoczecia).format('YYYY-MM-DD')
-    result.recordset[0].terminZakonczenia =  moment(result.recordset[0].terminZakonczenia).format('YYYY-MM-DD')
+    if (result.rowsAffected[0] === 1) {
+      const status = result.recordset[0].status
 
-    if (status === "planowana") {
-      mission = result.recordset
+      result.recordset[0].terminRozpoczecia = moment(result.recordset[0].terminRozpoczecia).format('YYYY-MM-DD')
+      result.recordset[0].terminZakonczenia = moment(result.recordset[0].terminZakonczenia).format('YYYY-MM-DD')
+
+      if (status === "planowana") {
+        mission = result.recordset
+      } else {
+        error = "Nie można edytować misji w tym stanie."
+      }
     } else {
-      error = "Nie można edytować misji w tym stanie."
+      error = "Coś poszło nie tak, spróbuj ponownie."
     }
   } catch (err) {
     console.error('Nie udało się pobrać szczegółów misji.', err)
