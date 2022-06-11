@@ -1,5 +1,2 @@
-High:
-- Wyświetlanie błędów i walidacja formularzy - TODO -> Mateusz
-
 Low:
 - Uporządkować nazewnistwo plików z linkami - TODO
