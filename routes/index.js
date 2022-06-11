@@ -200,6 +200,16 @@ async function showExamples(req, res) {
 }
 
 async function showMisjaCreateForm(req, res) {
+  req.session.date = new Date()
+  let month = req.session.date.getMonth() + 1
+  if (month < 10) {
+    month = '0' + month
+  }
+  let day = req.session.date.getDate() + 1
+  if (day < 10) {
+    day = '0' + day
+  }
+  let date =   req.session.date.getFullYear() + "-" + month + "-" + day
   if (req.session.isSuperAdmin) {
     privileged = true
   }
@@ -208,13 +218,14 @@ async function showMisjaCreateForm(req, res) {
   }
   res.render('misjaCreate', {
     privileged: privileged,
-    userLogin: req.session?.userLogin
+    userLogin: req.session?.userLogin,
+    date: date
   })
 }
 // Tworzenie użytkowników
 async function createUser(req, res) {
   let user = []
-
+  message = undefined
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -235,8 +246,7 @@ async function createUser(req, res) {
             '(@Imie, @Nazwisko, @Ulica, @NumerDomu, @NumerMieszkania, @Miasto, @KodPocztowy, @RodzajUzytkownika, @Specjalizacja, @SzefId, @Haslo, @Login)')
   } catch (err) {
     console.error('Nie udało się dodać użytkownika.', err)
-    // res.render()
-    // return
+    message = 'Nie udało się dodać użytkownika.'
   }
 
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
@@ -245,14 +255,22 @@ async function createUser(req, res) {
   else {
     privileged = false
   }
-
-  res.redirect('uzytkownicy');
+  if (message === undefined) {
+    res.redirect('uzytkownicy');
+  }
+  else {
+    res.render('userCreate', {
+      error: message,
+      userLogin: req.session?.userLogin,
+      privileged: privileged
+    })
+  }
 }
 
 // Tworzenie misji
 async function createMission(req, res) {
   let mission = []
-
+  message = undefined
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -265,6 +283,7 @@ async function createMission(req, res) {
             '(@Nazwa, @Opis, @terminRozpoczecia, @terminZakonczenia, @Status)')
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
+    message = 'Nie udało się dodać misji.'
   }
 
   if(req.session.isSuperAdmin || req.session.isAdmin)  {
@@ -274,7 +293,16 @@ async function createMission(req, res) {
     privileged = false
   }
 
-  res.redirect('misje')
+  if (message === undefined) {
+    res.redirect('misje');
+  }
+  else {
+    res.render('misjaCreate', {
+      error: message,
+      userLogin: req.session?.userLogin,
+      privileged: privileged
+    })
+  }
 }
 
 async function showFormCreateUser(req, res) {
@@ -472,19 +500,29 @@ async function StworzMisjeZWzorcemFormularz(req, res) {
   else {
     privileged = false
   }
-
+  req.session.date = new Date()
+  let month = req.session.date.getMonth() + 1
+  if (month < 10) {
+    month = '0' + month
+  }
+  let day = req.session.date.getDate() + 1
+  if (day < 10) {
+    day = '0' + day
+  }
+  let date =   req.session.date.getFullYear() + "-" + month + "-" + day
   res.render('StworzMisjeZWzorcem', {
     wzorzec: wzorzec,
     message: res.message,
     userLogin: req.session?.userLogin,
     privileged: privileged,
-    error: error
+    error: error,
+    date: date
   })
 }
 
 async function StworzMisjeZWzorcem(req, res) {
   let wzorzec = []
-
+  message = undefined
   try {
     const dbRequest = await request()
     result = await dbRequest
@@ -497,6 +535,7 @@ async function StworzMisjeZWzorcem(req, res) {
         .query('INSERT INTO Misja (nazwa, opis, terminRozpoczecia, terminZakonczenia, status, wzorzecId) VALUES (@Nazwa, @Opis, @terminRozpoczecia, @terminZakonczenia, @Status, @IdWzorca)')
   } catch (err) {
     console.error('Nie udało się dodać misji.', err)
+    message = "Nie udało się dodać misji."
   }
 
   if (req.session.isSuperAdmin || req.session.isAdmin) {
@@ -506,7 +545,16 @@ async function StworzMisjeZWzorcem(req, res) {
     privileged = false
   }
 
-  res.redirect('misje')
+  if (message === undefined) {
+    res.redirect('/misje')
+  }
+  else {
+    res.render('StworzMisjeZWzorcem', {
+      error: message,
+      privileged: privileged,
+      userLogin: req.session?.userLogin
+    })
+  }
 }
 
 async function DeleteMemberOfCrew(req, res) {
