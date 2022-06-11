@@ -1,21 +1,23 @@
 {{#if privileged}}
-    <h1 class="title">Użytkownicy</h1>
-    <table>
-        <th>ID</th>
-        <th>Imie</th>
-        <th>Nazwisko</th>
-        <th>Szczegóły</th>
-    {{#each crew}}
-        <div class="user">
-            <tr>
-                <td>{{this.id}}</td>
-                <td>{{this.imie}}</td>
-                <td>{{this.nazwisko}}</td>
-                <td><a href="userDetails?id={{this.id}}">Więcej szczegółów</td>
-            </tr>
-        </div>
-    {{/each}}
-    </table>
+    <div class="animate__animated animate__backInUp">
+        <h1 class="title">Użytkownicy</h1>
+        <table>
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Szczegóły</th>
+        {{#each crew}}
+            <div class="user">
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.imie}}</td>
+                    <td>{{this.nazwisko}}</td>
+                    <td><a href="userDetails?id={{this.id}}">Więcej szczegółów</td>
+                </tr>
+            </div>
+        {{/each}}
+        </table>
+    </div>
 {{else}}
     <div class="alert alert-danger mt-3" role="alert">
     Nie masz uprawnień do tej strony

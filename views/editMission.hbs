@@ -5,6 +5,7 @@
         </div>
       {{else}}
 {{#each mission}}
+<div class="animate__animated animate__backInUp">
     <form action="" method="POST" class="formularzTworzeniaMisji">
         <div class="mb-3">
             <label for="nazwa" class="form-label">Nazwa*</label>
@@ -60,6 +61,7 @@
             <button class="btn btn-lg btn-primary">Potwierdź edycje</button>
         </div>
     </form>
+</div>
 {{/each}}
     {{/if}}
 {{else}}

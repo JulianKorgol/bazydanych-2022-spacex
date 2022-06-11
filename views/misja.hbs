@@ -1,5 +1,6 @@
 {{#if privileged}}
- <h1 class="title">Lista Misji</h1>
+<div class="animate__animated animate__backInUp">
+    <h1 class="title">Lista Misji</h1>
         <table>
             <th>ID</th>
             <th>Nazwa</th>
@@ -23,6 +24,7 @@
                 </div>
             {{/each}}
         </table>
+</div>
 {{else}}
     <div class="alert alert-danger mt-3" role="alert">
         Nie masz uprawnień do tej strony

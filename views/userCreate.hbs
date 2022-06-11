@@ -4,130 +4,132 @@
   </div>
 {{/if}}
 {{#if privileged}}
-<form action="" method="POST" class="formularzTworzeniaUzytkownika">
-  <div class="mb-3">
-    <label for="imie" class="form-label">Imie*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="imie"
-      id="imie"
-      minLength="3"
-      required
-    />
+  <div class="animate__animated animate__backInUp">
+    <form action="" method="POST" class="formularzTworzeniaUzytkownika">
+      <div class="mb-3">
+        <label for="imie" class="form-label">Imie*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="imie"
+          id="imie"
+          minLength="3"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="nazwisko" class="form-label">Nazwisko*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nazwisko"
+          id="nazwisko"
+          minLength="3"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="ulica" class="form-label">Ulica*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="ulica"
+          id="ulica"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="numerDomu" class="form-label">Numer Domu*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="numerDomu"
+          id="numerDomu"
+          minValue="1"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="numerMieszkania" class="form-label">Numer Mieszkania</label>
+        <input
+          type="text"
+          class="form-control"
+          name="numerMieszkania"
+          id="numerMieszkania"
+          minValue="1"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="miasto" class="form-label">Miasto*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="miasto"
+          id="miasto"
+          required
+        />
+        </div>
+        <div class="mb-3">
+        <label for="kodPocztowy" class="form-label">Kod Pocztowy*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="kodPocztowy"
+          id="kodPocztowy"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="rodzajUzytkownika" class="form-label">Rodzaj Użytkownika*</label>
+          <select name="rodzajUzytkownika" id="rodzajUzytkownika" required class="form-control">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+          </select>
+      </div>
+      <div class="mb-3">
+        <label for="specjalizacja" class="form-label">Specjalizacja</label>
+        <input
+          type="text"
+          class="form-control"
+          name="specjalizacja"
+          id="specjalizacja"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="SzefId" class="form-label">Szef ID</label>
+          <select name="SzefId" id="SzefId" class="form-control">
+          {{#each szefowie}}
+              <option value="{{this.id}}">{{this.imie}} {{this.nazwisko}} ({{this.id}})</option>
+          {{/each}}
+          </select>
+      </div>
+      <div class="mb-3">
+        <label for="haslo" class="form-label">Haslo*</label>
+        <input
+          type="password"
+          class="form-control"
+          name="haslo"
+          id="haslo"
+          minlength="11"
+          required
+        />
+      </div>
+        <div class="mb-3">
+        <label for="login" class="form-label">Login*</label>
+        <input
+          type="text"
+          class="form-control"
+          name="login"
+          id="login"
+          minlength="4"
+          required
+        />
+      </div>
+      <div class="text-center mb-3">
+        <button class="btn btn-lg btn-primary">Stwórz</button>
+      </div>
+    </form>
   </div>
-  <div class="mb-3">
-    <label for="nazwisko" class="form-label">Nazwisko*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="nazwisko"
-      id="nazwisko"
-      minLength="3"
-      required
-    />
-  </div>
-  <div class="mb-3">
-    <label for="ulica" class="form-label">Ulica*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="ulica"
-      id="ulica"
-      required
-    />
-  </div>
-  <div class="mb-3">
-    <label for="numerDomu" class="form-label">Numer Domu*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="numerDomu"
-      id="numerDomu"
-      minValue="1"
-      required
-    />
-  </div>
-  <div class="mb-3">
-    <label for="numerMieszkania" class="form-label">Numer Mieszkania</label>
-    <input
-      type="text"
-      class="form-control"
-      name="numerMieszkania"
-      id="numerMieszkania"
-      minValue="1"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="miasto" class="form-label">Miasto*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="miasto"
-      id="miasto"
-      required
-    />
-    </div>
-    <div class="mb-3">
-    <label for="kodPocztowy" class="form-label">Kod Pocztowy*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="kodPocztowy"
-      id="kodPocztowy"
-      required
-    />
-  </div>
-  <div class="mb-3">
-    <label for="rodzajUzytkownika" class="form-label">Rodzaj Użytkownika*</label>
-      <select name="rodzajUzytkownika" id="rodzajUzytkownika" required class="form-control">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-      </select>
-  </div>
-  <div class="mb-3">
-    <label for="specjalizacja" class="form-label">Specjalizacja</label>
-    <input
-      type="text"
-      class="form-control"
-      name="specjalizacja"
-      id="specjalizacja"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="SzefId" class="form-label">Szef ID</label>
-      <select name="SzefId" id="SzefId" class="form-control">
-      {{#each szefowie}}
-          <option value="{{this.id}}">{{this.imie}} {{this.nazwisko}} ({{this.id}})</option>
-      {{/each}}
-      </select>
-  </div>
-  <div class="mb-3">
-    <label for="haslo" class="form-label">Haslo*</label>
-    <input
-      type="password"
-      class="form-control"
-      name="haslo"
-      id="haslo"
-      minlength="11"
-      required
-    />
-  </div>
-    <div class="mb-3">
-    <label for="login" class="form-label">Login*</label>
-    <input
-      type="text"
-      class="form-control"
-      name="login"
-      id="login"
-      minlength="4"
-      required
-    />
-  </div>
-  <div class="text-center mb-3">
-    <button class="btn btn-lg btn-primary">Stwórz</button>
-  </div>
-</form>
 {{else}}
 <div class="alert alert-danger mt-3" role="alert">
   Nie masz uprawnień do tej strony

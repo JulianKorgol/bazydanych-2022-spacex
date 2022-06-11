@@ -4,6 +4,7 @@
             {{error}}
         </div>
     {{else}}
+<div class="animate__animated animate__backInUp">
     <form action="" method="POST" class="formularzTworzeniaMisji">
         {{#each wzorzec}}
         <div class="mb-3">
@@ -54,6 +55,7 @@
             <button class="btn btn-lg btn-primary">Stwórz</button>
         </div>
     </form>
+</div>
     {{/if}}
     <div class="text-center">
         <a href="/panel">Powrót</a>

@@ -6,10 +6,10 @@
             </div>
         {{else}}
             {{#each user}}
-                <h1 class="title">Szczegóły użytkownika {{this.imie}} {{this.nazwisko}}</h1>
-                <p class="center">ID użytkownika: {{this.id}}</p>
+                <h1 class="title animate__animated animate__backInDown">Szczegóły użytkownika {{this.imie}} {{this.nazwisko}}</h1>
+                <p class="center animate__animated animate__backInUp">ID użytkownika: {{this.id}}</p>
             {{/each}}
-            <div class="user">
+            <div class="user animate__animated animate__bounceInUp">
                 <table>
                     <th>ID</th>
                     <th>Imie</th>
@@ -35,8 +35,8 @@
                     {{/each}}
                 </table>
             </div>
-            <h2 class="center" id="UserMissions">Misje, w których uczestniczy</h2>
-            <div class="missionTable">
+            <h2 class="center animate__animated animate__backInLeft" id="UserMissions">Misje, w których uczestniczy</h2>
+            <div class="missionTable animate__animated animate__bounceInUp">
                 <table>
                     <tr>
                         <th>ID</th>

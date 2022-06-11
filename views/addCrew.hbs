@@ -5,10 +5,10 @@
         </div>
     {{else}}
     {{#each mission}}
-        <h1 class="title">Dodawanie załogentów do misji: {{this.nazwa}}</h1>
-        <p id="idMisji">ID misji: {{this.id}}</p>
+        <h1 class="title animate__animated animate__backInDown">Dodawanie załogentów do misji: {{this.nazwa}}</h1>
+        <p id="idMisji" class="animate__animated animate__backInUp">ID misji: {{this.id}}</p>
     {{/each}}
-    <div class="formularzDodawaniaZalogenta">
+    <div class="formularzDodawaniaZalogenta animate__animated animate__bounceInUp">
         <form method="POST">
             <div class="mb-3">
                 <label for="crew" class="form-label">Załogent*</label>

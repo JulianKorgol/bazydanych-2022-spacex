@@ -1,13 +1,13 @@
 {{#if privileged}}
-    <form action="StworzMisjeZWzorcem" method="GET" class="formularzWybieraniaWzorcaMisji">
-        <div class="mb-3">
+    <form action="StworzMisjeZWzorcem" method="GET" class="formularzWybieraniaWzorcaMisji center">
+        <div class="mb-3 animate__animated animate__backInUp">
             <label for="listaWzorcow" class="form-label">Wybierz wzorzec</label>
             <select name="listaWzorcow" id="listaWzorcow">
                 {{#each wzorce}}
                 <option value="{{this.id}}">{{this.nazwa}}</option>
                 {{/each}}
             </select>
-            <div class="text-center mb-3">
+            <div class="text-center mb-3 animate__animated animate__jello">
                 <button class="btn btn-lg btn-primary">Wybierz</button>
             </div>
         </div>
